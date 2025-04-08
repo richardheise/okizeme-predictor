@@ -11,6 +11,8 @@ class MarkovChain():
 
     def __init__(self, order, actions) -> None:
 
+        self.order = order
+
         # Create a state for each combination of 'order' number of previous observations
         states = actions.copy()
         for _ in range(order - 1):
@@ -24,24 +26,35 @@ class MarkovChain():
             for action in actions:
                 self.markov_matrix[state][action] = {'prob' : 1 / len(actions), 'n_obs' : 0 }
 
-    def update_matrix(self, state, action_taken):
+        self.curr_state = [random.choice(actions)]
+
+    def update_matrix(self, action_taken):
+
+        state_str = ''.join(self.curr_state)
+        print(state_str)
 
         # Apply decay to state
         total_obs = 1
-        for action in self.markov_matrix[state].keys():
-            self.markov_matrix[state][action]['n_obs'] = self.DECAY * self.markov_matrix[state][action]['n_obs']
-            total_obs += self.markov_matrix[state][action]['n_obs']
+        for action in self.markov_matrix[state_str].keys():
+            self.markov_matrix[state_str][action]['n_obs'] = self.DECAY * self.markov_matrix[state_str][action]['n_obs']
+            total_obs += self.markov_matrix[state_str][action]['n_obs']
 
-        self.markov_matrix[state][action_taken]['n_obs'] += 1
+        self.markov_matrix[state_str][action_taken]['n_obs'] += 1
         
         # Re estimate probabiblities
-        for action in self.markov_matrix[state].keys():
-            self.markov_matrix[state][action]['prob'] = self.markov_matrix[state][action]['n_obs'] / total_obs
+        for action in self.markov_matrix[state_str].keys():
+            self.markov_matrix[state_str][action]['prob'] = self.markov_matrix[state_str][action]['n_obs'] / total_obs
 
-    def predict(self, state):
+        self.curr_state.append(action_taken)
+        if len(self.curr_state) > self.order:
+            self.curr_state.pop(0)
+
+    def predict(self):
+
+        state_str = ''.join(self.curr_state)
 
         # Find max probabily 
-        state_actions = list(self.markov_matrix[state].items())
+        state_actions = list(self.markov_matrix[state_str].items())
         max_prob = max([action[1]['prob'] for action in state_actions])
 
         # Randonly choose between the actions with highest probability
@@ -49,8 +62,8 @@ class MarkovChain():
 
 
 def_markov = MarkovChain(3, DEFENSIVE_ACTIONS)
-def_markov.update_matrix("Block", "Block")
-def_markov.update_matrix("Block", "Throw")
-def_markov.update_matrix("Block", "Reversal")
-def_markov.update_matrix("Block", "Block")
-print(def_markov.predict("Throw"))
+def_markov.update_matrix("Block")
+def_markov.update_matrix("Throw")
+def_markov.update_matrix("Reversal")
+def_markov.update_matrix("Block")
+print(def_markov.predict())
