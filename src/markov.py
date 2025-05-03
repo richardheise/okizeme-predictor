@@ -4,8 +4,8 @@ import random
 class MarkovChain():
 
     DECAY = 0.9
-    PREDICT_NUM = 5
-    PRED_THRES = 0.1
+    PREDICT_NUM = 3
+    PRED_THRES = 0.2
 
     def __init__(self, order, actions) -> None:
 
@@ -70,7 +70,7 @@ class MarkovChain():
         # Filter actions with probability above threshold
         possible_actions = [action for action in state_actions if action[1]['prob'] >= (max_prob - self.PRED_THRES)]
         possible_actions = sorted(possible_actions, key=lambda action: action[1]['prob'], reverse=True)[:self.PREDICT_NUM]
-
+        
         return possible_actions
     
     def __str__(self) -> str:
