@@ -1,0 +1,47 @@
+{
+    "Throw": {
+        "Block": 1.7,
+        "Guard_jump": -0.5,
+        "Button": 1.7,
+        "Throw": 0.7,
+        "Reversal": -2.1,
+        "Parry_high": 1.7,
+        "Parry_low": 1.7
+    },
+    "Delayed_tc": {
+        "Block": 0.7,
+        "Guard_jump": 4.2,
+        "Button": -4.2,
+        "Throw": -1.7,
+        "Reversal": 3.7,
+        "Parry_high": -4.2,
+        "Parry_low": 4.2
+    },
+    "Meaty_high": {
+        "Block": 0.7,
+        "Guard_jump": 0.7,
+        "Button": 4.2,
+        "Throw": 4.2,
+        "Reversal": -2.2,
+        "Parry_high": -4.2,
+        "Parry_low": 4.2
+    },
+    "Meaty_low": {
+        "Block": 0.5,
+        "Guard_jump": 0.5,
+        "Button": 3.2,
+        "Throw": 3.2,
+        "Reversal": -2.2,
+        "Parry_high": 3.2,
+        "Parry_low": -4.2
+    },
+    "Shimmy_lp": {
+        "Block": 0.5,
+        "Guard_jump": -0.5,
+        "Button": -3.7,
+        "Throw": 3.7,
+        "Reversal": 4.2,
+        "Parry_high": 0.5,
+        "Parry_low": 0.5
+    }
+}

@@ -5,7 +5,7 @@ class MarkovChain():
 
     DECAY = 0.9
 
-    def __init__(self, order, actions) -> None:
+    def __init__(self, order, actions, markov_matrix=None) -> None:
 
         self.order = order
         self.markov_matrix = {}
@@ -16,13 +16,19 @@ class MarkovChain():
             for state in itertools.product(actions, states):
                 states.append(''.join(state))
 
-        for state in states:
-            # Chance for each action to happen in given state
-            self.markov_matrix[state] = {}
-            for action in actions:
-                self.markov_matrix[state][action] = {'prob' : 1 / len(actions), 'n_obs' : 1.0 }
+        if markov_matrix is None:
+            for state in states:
+                # Chance for each action to happen in given state
+                self.markov_matrix[state] = {}
+                for action in actions:
+                    self.markov_matrix[state][action] = {'prob' : 1 / len(actions), 'n_obs' : 1.0 }
+        else:
+            self.markov_matrix = markov_matrix
 
         self.curr_state = None
+
+    def get_markov_matrix(self):
+        return self.markov_matrix
 
     def update_matrix(self, action_taken):
 
@@ -73,16 +79,21 @@ class MarkovChain():
 
 class MultiMarkovChain():
 
-    def __init__(self, order, actions) -> None:
+    def __init__(self, order, actions, markov_weights=None) -> None:
         self.order = order
         self.markov_chains = []
-        
-        for i in range(order):
-            self.markov_chains.append(MarkovChain(i + 1, actions))
-
         self.curr_round = 0
         self.correct_predictions = [[] for _ in range(self.order)]
-        self.last_predictions = [None] * order
+        self.last_predictions = [None] * self.order
+        
+        for i in range(order):
+            if markov_weights is None:
+                self.markov_chains.append(MarkovChain(i + 1, actions))
+            else:
+                self.markov_chains.append(MarkovChain(i + 1, actions, markov_weights[i]))
+
+    def get_markov_chains(self):
+        return [markov_chain.get_markov_matrix() for markov_chain in self.markov_chains]
 
     def predict(self):
         for i, markov_chain in enumerate(self.markov_chains):

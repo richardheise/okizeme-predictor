@@ -1,25 +1,16 @@
 import rvr
 import os
 
-NUM_ROUNDS = 140
+LOAD_WEIGHTS = False
 
-DEFFENSIVE_REWARDS = {
-    "Block": {"Throw": -1.7, "Delayed_tc": -0.7, "Meaty_high": -0.7, "Meaty_low": -0.5, "Shimmy_lp": -0.5},
-    "Guard_jump": {"Throw": 0.5, "Delayed_tc": -4.2, "Meaty_high": -0.7, "Meaty_low": -0.5, "Shimmy_lp": 0.5},
-    "Button": {"Throw": -1.7, "Delayed_tc": 4.2, "Meaty_high": -4.2, "Meaty_low": -3.2, "Shimmy_lp": 3.7},
-    "Throw": {"Throw": -0.5, "Delayed_tc": 1.7, "Meaty_high": -4.2, "Meaty_low": -3.2, "Shimmy_lp": -4.2},
-    "Reversal": {"Throw": 2.1, "Delayed_tc": -3.7, "Meaty_high": 2.1, "Meaty_low": 2.1, "Shimmy_lp": -4.2},
-    "Parry_high": {"Throw": -1.7, "Delayed_tc": 4.2, "Meaty_high": 4.2, "Meaty_low": -3.2, "Shimmy_lp": -0.5},
-    "Parry_low": {"Throw": -1.7, "Delayed_tc": -4.2, "Meaty_high": -4.2, "Meaty_low": 4.2, "Shimmy_lp": 0.5},
-}
+NUM_ROUNDS = 5
+MARKOV_ORDER = 5
 
-OFFENSIVE_REWARDS = {
-    "Throw": {"Block": 1.7, "Guard_jump": -0.5, "Button": 1.7, "Throw": 0.7, "Reversal": -2.1, "Parry_high": 1.7, "Parry_low": 1.7},
-    "Delayed_tc": {"Block": 0.7, "Guard_jump": 4.2, "Button": -4.2, "Throw": -1.7, "Reversal": 3.7, "Parry_high": -4.2, "Parry_low": 4.2},
-    "Meaty_high": {"Block": 0.7, "Guard_jump": 0.7, "Button": 4.2, "Throw": 4.2, "Reversal": -2.2, "Parry_high": -4.2, "Parry_low": 4.2},
-    "Meaty_low": {"Block": 0.5, "Guard_jump": 0.5, "Button": 3.2, "Throw": 3.2, "Reversal": -2.2, "Parry_high": 3.2, "Parry_low": -4.2},
-    "Shimmy_lp": {"Block": 0.5, "Guard_jump": -0.5, "Button": -3.7, "Throw": 3.7, "Reversal": 4.2, "Parry_high": 0.5, "Parry_low": 0.5},
-}
+DEFENSE_RVR_PATH = "src/weights/rvr_defense.json"
+OFFENSE_RVR_PATH = "src/weights/rvr_offense.json"
+
+OFFENSE_MARKOV_PATH = "src/weights/offense"
+DEFENSE_MARKOV_PATH = "src/weights/defense"
 
 def get_player_action(prompt, possible_actions):
     print("Actions:")
@@ -41,11 +32,21 @@ def get_player_action(prompt, possible_actions):
         except ValueError:
             print("Invalid input. Please enter a valid action number.")
             return get_player_action(prompt, possible_actions)
+    else:
+        print("Invalid input. Please enter a valid action number.")
+        return get_player_action(prompt, possible_actions)
 
 if __name__ == "__main__":
 
-    defensive_ai = rvr.AI(DEFFENSIVE_REWARDS)
-    offensive_ai = rvr.AI(OFFENSIVE_REWARDS)
+    defensive_ai = rvr.AI({})
+    offensive_ai = rvr.AI({})
+
+    if LOAD_WEIGHTS:
+        defensive_ai.from_files(DEFENSE_RVR_PATH, DEFENSE_MARKOV_PATH, MARKOV_ORDER)
+        offensive_ai.from_files(OFFENSE_RVR_PATH, OFFENSE_MARKOV_PATH, MARKOV_ORDER)
+    else:
+        defensive_ai.from_files(DEFENSE_RVR_PATH, markov_order=MARKOV_ORDER)
+        offensive_ai.from_files(OFFENSE_RVR_PATH, markov_order=MARKOV_ORDER)
 
     ai_wins, player_wins = 0, 0
 
@@ -106,3 +107,7 @@ if __name__ == "__main__":
         offensive_ai.update(player_defense)
 
         input("\n=====================\n")
+
+    if LOAD_WEIGHTS:
+        defensive_ai.save_weights(DEFENSE_MARKOV_PATH)
+        offensive_ai.save_weights(OFFENSE_MARKOV_PATH)
