@@ -1,6 +1,6 @@
 <script>
 	function continuar() {
-		window.location.href = '/tabela';
+		window.location.href = '/como-jogar';
 	}
 </script>
 
@@ -45,9 +45,10 @@
 
 			<p class="text-lg text-gray-300">
 				Será um conjunto de partidas FT10 (Quem Vencer 10). Cada partida é composta por uma melhor
-				de 2 rounds. Ou seja, se prepare para jogar bastante! Você terá uma barra de vida de 10
+				de 2 rounds. Ou seja, se prepare para jogar bastante! Você terá uma barra de vida de 8
 				pontos, assim como seu oponente. Caso vença a interação de okizeme, será seu turno de
-				atacar! Caso perca, será a vez do seu oponente.
+				atacar! Caso perca, será a vez do seu oponente. Caso empate, ambos jogadores terão 50% de
+				chance de voltar à ofensiva!
 			</p>
 
 			<p class="text-lg text-gray-300">

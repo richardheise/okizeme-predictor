@@ -27,7 +27,7 @@
 			<p class="text-base leading-relaxed font-semibold text-gray-200 md:text-xl">
 				Este é um <span class="text-red-400">Simulador de Okizeme</span>, onde você enfrentará nossa
 				inteligência artificial em combates intensos.<br /><br />
-				Cada jogador possui <span class="text-yellow-300">10 pontos de vida</span>. O vencedor será
+				Cada jogador possui <span class="text-yellow-300">8 pontos de vida</span>. O vencedor será
 				aquele que conquistar <span class="text-green-400">10 partidas</span> primeiro.<br /><br />
 				Uma partida é decidida em <span class="text-orange-400">melhor de 3 rounds</span>: quem
 				vencer 2 rounds, leva a vitória da partida.<br /><br />
