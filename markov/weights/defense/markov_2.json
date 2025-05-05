@@ -1,0 +1,662 @@
+{
+    "Throw": {
+        "Throw": {
+            "prob": 0.6094352258352554,
+            "n_obs": 4.0951
+        },
+        "Delayed_tc": {
+            "prob": 0.0976411935411861,
+            "n_obs": 0.6561000000000001
+        },
+        "Meaty_high": {
+            "prob": 0.0976411935411861,
+            "n_obs": 0.6561000000000001
+        },
+        "Meaty_low": {
+            "prob": 0.0976411935411861,
+            "n_obs": 0.6561000000000001
+        },
+        "Shimmy_lp": {
+            "prob": 0.0976411935411861,
+            "n_obs": 0.6561000000000001
+        }
+    },
+    "Delayed_tc": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Meaty_high": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Meaty_low": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Shimmy_lp": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "ThrowThrow": {
+        "Throw": {
+            "prob": 0.7967164021091278,
+            "n_obs": 7.146979811148159
+        },
+        "Delayed_tc": {
+            "prob": 0.022951910642416036,
+            "n_obs": 0.2058911320946491
+        },
+        "Meaty_high": {
+            "prob": 0.022951910642416036,
+            "n_obs": 0.2058911320946491
+        },
+        "Meaty_low": {
+            "prob": 0.022951910642416036,
+            "n_obs": 0.2058911320946491
+        },
+        "Shimmy_lp": {
+            "prob": 0.13442786596362402,
+            "n_obs": 1.205891132094649
+        }
+    },
+    "ThrowDelayed_tc": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "ThrowMeaty_high": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "ThrowMeaty_low": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "ThrowShimmy_lp": {
+        "Throw": {
+            "prob": 0.34545454545454546,
+            "n_obs": 1.9
+        },
+        "Delayed_tc": {
+            "prob": 0.16363636363636364,
+            "n_obs": 0.9
+        },
+        "Meaty_high": {
+            "prob": 0.16363636363636364,
+            "n_obs": 0.9
+        },
+        "Meaty_low": {
+            "prob": 0.16363636363636364,
+            "n_obs": 0.9
+        },
+        "Shimmy_lp": {
+            "prob": 0.16363636363636364,
+            "n_obs": 0.9
+        }
+    },
+    "Delayed_tcThrow": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Delayed_tcDelayed_tc": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Delayed_tcMeaty_high": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Delayed_tcMeaty_low": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Delayed_tcShimmy_lp": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Meaty_highThrow": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Meaty_highDelayed_tc": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Meaty_highMeaty_high": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Meaty_highMeaty_low": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Meaty_highShimmy_lp": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Meaty_lowThrow": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Meaty_lowDelayed_tc": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Meaty_lowMeaty_high": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Meaty_lowMeaty_low": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Meaty_lowShimmy_lp": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Shimmy_lpThrow": {
+        "Throw": {
+            "prob": 0.16363636363636364,
+            "n_obs": 0.9
+        },
+        "Delayed_tc": {
+            "prob": 0.16363636363636364,
+            "n_obs": 0.9
+        },
+        "Meaty_high": {
+            "prob": 0.16363636363636364,
+            "n_obs": 0.9
+        },
+        "Meaty_low": {
+            "prob": 0.34545454545454546,
+            "n_obs": 1.9
+        },
+        "Shimmy_lp": {
+            "prob": 0.16363636363636364,
+            "n_obs": 0.9
+        }
+    },
+    "Shimmy_lpDelayed_tc": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Shimmy_lpMeaty_high": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Shimmy_lpMeaty_low": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    },
+    "Shimmy_lpShimmy_lp": {
+        "Throw": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Delayed_tc": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_high": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Meaty_low": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        },
+        "Shimmy_lp": {
+            "prob": 0.2,
+            "n_obs": 1.0
+        }
+    }
+}
