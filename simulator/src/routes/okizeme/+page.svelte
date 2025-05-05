@@ -14,6 +14,7 @@
 	let shakePlayer = false;
 	let shakeOpponent = false;
 	let pulseVictory = false;
+	let screenShake = false; // Nova variável para tremer a tela
 	const maxHP = 8;
 
 	// Variáveis para personagens
@@ -90,6 +91,7 @@
 		pulseVictory = false;
 		playerHit = false;
 		opponentHit = false;
+		screenShake = false; // Reset screen shake
 		playerSprite = 'default';
 		opponentSprite = 'default';
 
@@ -108,6 +110,7 @@
 				resultMsg = `Você foi acertado! Sofreu ${damage} de dano.`;
 				lastChoices.outcome = 'O oponente venceu a interação.';
 				shakePlayer = true;
+				screenShake = true; // Ativa screen shake quando toma dano
 				playerHit = true;
 				playerSprite = 'hurt';
 				isDefending = true;
@@ -153,6 +156,7 @@
 				resultMsg = `Você perdeu a interação! Sofreu ${-damage} de dano.`;
 				lastChoices.outcome = 'O oponente venceu a interação.';
 				shakePlayer = true;
+				screenShake = true; // Ativa screen shake quando toma dano
 				playerHit = true;
 				playerSprite = 'hurt';
 				opponentSprite = 'attack';
@@ -179,26 +183,20 @@
 			roundWins.ai++;
 			isDefending = true;
 			resultMsg = 'Novo round! Fight!';
-			pulseVictory = true;
-			setTimeout(() => (pulseVictory = false), 1000);
 			resetRound();
 		} else if (opponentHP <= 0) {
 			roundWins.player++;
 			resultMsg = 'Novo round! Fight!';
-			pulseVictory = true;
-			setTimeout(() => (pulseVictory = false), 1000);
 			resetRound();
 		}
 
 		if (roundWins.player === 2) {
 			matchWins.player++;
 			resultMsg = `Você venceu a partida! O placar é: ${matchWins.player}:${matchWins.ai}`;
-			pulseVictory = true;
 			resetMatch();
 		} else if (roundWins.ai === 2) {
 			matchWins.ai++;
 			resultMsg = `Você perdeu a partida! O placar é: ${matchWins.player}:${matchWins.ai}`;
-			pulseVictory = true;
 			isDefending = false;
 			resetMatch();
 		}
@@ -221,46 +219,26 @@
 	}
 </script>
 
-<div class="bg flex min-h-screen items-center justify-center p-4">
-	<div
-		class="relative w-[90%] rounded-2xl bg-black/90 p-8 text-white shadow-2xl {pulseVictory
-			? 'animate-pulse'
-			: ''}"
-	>
+<!-- Container principal com tamanho fixo -->
+<div class="fixed-container">
+	<div class="bg flex min-h-screen items-center justify-center p-4">
 		<!-- Placar de partidas no topo -->
 		<div
-			class="absolute -top-6 left-1/2 -translate-x-1/2 transform rounded-lg bg-gray-800 px-6 py-3 text-2xl font-bold shadow-lg"
+			class="absolute -top-0 left-1/2 w-[390px] -translate-x-1/2 transform rounded-lg bg-gray-800 px-6 py-3 text-2xl font-bold text-yellow-100 shadow-lg"
 		>
 			Partidas: Você {matchWins.player} × {matchWins.ai} Oponente
 		</div>
-
-		<!-- Botão Tabela e Música -->
-		<div class="absolute top-4 right-4 flex gap-2">
-			<button
-				class="flex items-center gap-2 rounded-lg bg-gray-700 px-4 py-2 text-white transition hover:bg-gray-600"
-				on:click={() => (showTableModal = true)}
-			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="h-6 w-6"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M4 6h16M4 10h16M4 14h16M4 18h16"
-					/>
-				</svg>
-				<span>Tabela</span>
-			</button>
-
-			<!-- Menu de Música -->
-			<div class="relative">
+		<!-- Cardbox central com tamanho fixo -->
+		<div
+			class="game-card relative h-[100vh] w-[90vw] rounded-2xl bg-black/90 p-8 text-white shadow-2xl {screenShake
+				? 'animate-screen-shake'
+				: ''}"
+		>
+			<!-- Botão Tabela e Música -->
+			<div class="absolute top-4 right-4 flex gap-2">
 				<button
 					class="flex items-center gap-2 rounded-lg bg-gray-700 px-4 py-2 text-white transition hover:bg-gray-600"
-					on:click={() => document.getElementById('musicDropdown').classList.toggle('hidden')}
+					on:click={() => (showTableModal = true)}
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -272,358 +250,401 @@
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
-							d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+							d="M4 6h16M4 10h16M4 14h16M4 18h16"
 						/>
 					</svg>
-					<span>Música</span>
+					<span>Tabela</span>
 				</button>
 
-				<div
-					id="musicDropdown"
-					class="absolute right-0 z-10 mt-2 hidden w-64 rounded-lg bg-gray-800 shadow-lg"
-				>
-					<div class="p-2">
-						{#each musicOptions as track}
-							<button
-								on:click={() => openMusicInNewTab(track.url)}
-								class="block w-full rounded px-4 py-2 text-left hover:bg-gray-700"
-							>
-								{track.name}
-							</button>
-						{/each}
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Cabeçalho -->
-		<h1 class="font-orbitron mb-8 text-center text-5xl font-bold tracking-wide text-yellow-400">
-			OKIZEME SHOWDOWN
-		</h1>
-
-		<!-- Área de combate -->
-		<div class="mb-8 flex items-end justify-between">
-			<!-- Jogador -->
-			<div class="flex w-[45%] flex-col items-center">
-				<!-- Personagem do Jogador -->
-				<div
-					class="relative mb-2 h-32 w-32 transition-all duration-300 {playerHit
-						? 'animate-hit'
-						: ''}"
-				>
-					{#if playerSprite === 'hurt'}
-						<div class="absolute inset-0 flex items-center justify-center">
-							<div class="h-24 w-24 rounded-full bg-red-500/20"></div>
-						</div>
-						<svg class="h-full w-full" viewBox="0 0 100 100">
-							<circle cx="50" cy="40" r="20" fill="#3b82f6" />
-							<circle cx="40" cy="35" r="3" fill="white" />
-							<circle cx="60" cy="35" r="3" fill="white" />
-							<path
-								d="M40,50 Q50,55 60,50"
-								stroke="white"
-								stroke-width="2"
-								fill="none"
-								stroke-linecap="round"
-							/>
-							<rect x="35" y="65" width="30" height="15" rx="5" fill="#3b82f6" />
-							<rect x="30" y="80" width="40" height="10" rx="5" fill="#3b82f6" />
-							<rect x="25" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
-							<rect x="65" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
-						</svg>
-					{:else if playerSprite === 'attack'}
-						<svg class="h-full w-full" viewBox="0 0 100 100">
-							<circle cx="50" cy="40" r="20" fill="#3b82f6" />
-							<circle cx="40" cy="35" r="3" fill="white" />
-							<circle cx="60" cy="35" r="3" fill="white" />
-							<path
-								d="M40,50 Q50,55 60,50"
-								stroke="white"
-								stroke-width="2"
-								fill="none"
-								stroke-linecap="round"
-							/>
-							<rect x="45" y="65" width="20" height="15" rx="5" fill="#3b82f6" />
-							<rect x="40" y="80" width="30" height="10" rx="5" fill="#3b82f6" />
-							<rect
-								x="25"
-								y="60"
-								width="10"
-								height="40"
-								rx="5"
-								fill="#3b82f6"
-								transform="rotate(-20, 30, 80)"
-							/>
-							<rect
-								x="65"
-								y="60"
-								width="10"
-								height="40"
-								rx="5"
-								fill="#3b82f6"
-								transform="rotate(20, 70, 80)"
-							/>
-						</svg>
-					{:else if playerSprite === 'ready'}
-						<svg class="h-full w-full" viewBox="0 0 100 100">
-							<circle cx="50" cy="40" r="20" fill="#3b82f6" />
-							<circle cx="40" cy="35" r="3" fill="white" />
-							<circle cx="60" cy="35" r="3" fill="white" />
-							<path
-								d="M40,50 Q50,55 60,50"
-								stroke="white"
-								stroke-width="2"
-								fill="none"
-								stroke-linecap="round"
-							/>
-							<rect x="35" y="65" width="30" height="15" rx="5" fill="#3b82f6" />
-							<rect x="30" y="80" width="40" height="10" rx="5" fill="#3b82f6" />
-							<rect x="25" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
-							<rect x="65" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
-						</svg>
-					{:else}
-						<svg class="h-full w-full" viewBox="0 0 100 100">
-							<circle cx="50" cy="40" r="20" fill="#3b82f6" />
-							<circle cx="40" cy="35" r="3" fill="white" />
-							<circle cx="60" cy="35" r="3" fill="white" />
-							<path
-								d="M40,50 Q50,55 60,50"
-								stroke="white"
-								stroke-width="2"
-								fill="none"
-								stroke-linecap="round"
-							/>
-							<rect x="35" y="65" width="30" height="15" rx="5" fill="#3b82f6" />
-							<rect x="30" y="80" width="40" height="10" rx="5" fill="#3b82f6" />
-							<rect x="25" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
-							<rect x="65" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
-						</svg>
-					{/if}
-				</div>
-
-				<div class="mb-2 text-2xl font-bold text-blue-400">JOGADOR</div>
-				<div class="relative h-8 w-full rounded-full bg-gray-700 shadow-inner">
-					<div
-						class="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-500 ease-out"
-						class:shake={shakePlayer}
-						style={`width: ${(playerHP / maxHP) * 100}%`}
-					></div>
-					<div
-						class="absolute inset-0 flex items-center justify-center text-sm font-bold text-white"
-					>
-						{playerHP.toFixed(1)} HP
-					</div>
-				</div>
-			</div>
-
-			<!-- VS -->
-			<div class="mx-4 flex flex-col items-center p-4">
-				<div class="text-4xl font-bold text-red-500">VS</div>
-				<div class="mt-2 text-lg font-semibold">
-					Rounds: {roundWins.player} × {roundWins.ai}
-				</div>
-			</div>
-
-			<!-- Oponente -->
-			<div class="flex w-[45%] flex-col items-center">
-				<!-- Personagem do Oponente -->
-				<div
-					class="relative mb-2 h-32 w-32 transition-all duration-300 {opponentHit
-						? 'animate-hit'
-						: ''}"
-				>
-					{#if opponentSprite === 'hurt'}
-						<div class="absolute inset-0 flex items-center justify-center">
-							<div class="h-24 w-24 rounded-full bg-red-500/20"></div>
-						</div>
-						<svg class="h-full w-full" viewBox="0 0 100 100">
-							<circle cx="50" cy="40" r="20" fill="#ef4444" />
-							<circle cx="40" cy="35" r="3" fill="white" />
-							<circle cx="60" cy="35" r="3" fill="white" />
-							<path
-								d="M40,50 Q50,55 60,50"
-								stroke="white"
-								stroke-width="2"
-								fill="none"
-								stroke-linecap="round"
-							/>
-							<rect x="35" y="65" width="30" height="15" rx="5" fill="#ef4444" />
-							<rect x="30" y="80" width="40" height="10" rx="5" fill="#ef4444" />
-							<rect x="25" y="60" width="10" height="30" rx="5" fill="#ef4444" />
-							<rect x="65" y="60" width="10" height="30" rx="5" fill="#ef4444" />
-						</svg>
-					{:else if opponentSprite === 'attack'}
-						<svg class="h-full w-full" viewBox="0 0 100 100">
-							<circle cx="50" cy="40" r="20" fill="#ef4444" />
-							<circle cx="40" cy="35" r="3" fill="white" />
-							<circle cx="60" cy="35" r="3" fill="white" />
-							<path
-								d="M40,50 Q50,55 60,50"
-								stroke="white"
-								stroke-width="2"
-								fill="none"
-								stroke-linecap="round"
-							/>
-							<rect x="45" y="65" width="20" height="15" rx="5" fill="#ef4444" />
-							<rect x="40" y="80" width="30" height="10" rx="5" fill="#ef4444" />
-							<rect
-								x="25"
-								y="60"
-								width="10"
-								height="40"
-								rx="5"
-								fill="#ef4444"
-								transform="rotate(-20, 30, 80)"
-							/>
-							<rect
-								x="65"
-								y="60"
-								width="10"
-								height="40"
-								rx="5"
-								fill="#ef4444"
-								transform="rotate(20, 70, 80)"
-							/>
-						</svg>
-					{:else if opponentSprite === 'ready'}
-						<svg class="h-full w-full" viewBox="0 0 100 100">
-							<circle cx="50" cy="40" r="20" fill="#ef4444" />
-							<circle cx="40" cy="35" r="3" fill="white" />
-							<circle cx="60" cy="35" r="3" fill="white" />
-							<path
-								d="M40,50 Q50,55 60,50"
-								stroke="white"
-								stroke-width="2"
-								fill="none"
-								stroke-linecap="round"
-							/>
-							<rect x="35" y="65" width="30" height="15" rx="5" fill="#ef4444" />
-							<rect x="30" y="80" width="40" height="10" rx="5" fill="#ef4444" />
-							<rect x="25" y="60" width="10" height="30" rx="5" fill="#ef4444" />
-							<rect x="65" y="60" width="10" height="30" rx="5" fill="#ef4444" />
-						</svg>
-					{:else}
-						<svg class="h-full w-full" viewBox="0 0 100 100">
-							<circle cx="50" cy="40" r="20" fill="#ef4444" />
-							<circle cx="40" cy="35" r="3" fill="white" />
-							<circle cx="60" cy="35" r="3" fill="white" />
-							<path
-								d="M40,50 Q50,55 60,50"
-								stroke="white"
-								stroke-width="2"
-								fill="none"
-								stroke-linecap="round"
-							/>
-							<rect x="35" y="65" width="30" height="15" rx="5" fill="#ef4444" />
-							<rect x="30" y="80" width="40" height="10" rx="5" fill="#ef4444" />
-							<rect x="25" y="60" width="10" height="30" rx="5" fill="#ef4444" />
-							<rect x="65" y="60" width="10" height="30" rx="5" fill="#ef4444" />
-						</svg>
-					{/if}
-				</div>
-
-				<div class="mb-2 text-2xl font-bold text-red-400">OPONENTE</div>
-				<div class="relative h-8 w-full rounded-full bg-gray-700 shadow-inner">
-					<div
-						class="h-full rounded-full bg-gradient-to-r from-red-500 to-red-600 transition-all duration-500 ease-out"
-						class:shake={shakeOpponent}
-						style={`width: ${(opponentHP / maxHP) * 100}%`}
-					></div>
-					<div
-						class="absolute inset-0 flex items-center justify-center text-sm font-bold text-white"
-					>
-						{opponentHP.toFixed(1)} HP
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Modo de jogo atual -->
-		<h2 class="mb-6 text-center text-2xl font-semibold text-gray-300">
-			{isDefending ? 'ESCOLHA SUA DEFESA' : 'ESCOLHA SEU ATAQUE'}
-		</h2>
-
-		<!-- Ações -->
-		<div class="mb-8 grid grid-cols-2 gap-4">
-			{#if isDefending}
-				{#each defensiveOptions as action, index}
+				<!-- Menu de Música -->
+				<div class="relative">
 					<button
-						on:click={() => play(index, true)}
-						class="rounded-xl border-2 border-blue-400 bg-blue-600/80 p-4 text-xl transition hover:bg-blue-700/90 hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 active:bg-blue-800"
+						class="flex items-center gap-2 rounded-lg bg-gray-700 px-4 py-2 text-white transition hover:bg-gray-600"
+						on:click={() => document.getElementById('musicDropdown').classList.toggle('hidden')}
 					>
-						{action}
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-6 w-6"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+							/>
+						</svg>
+						<span>Música</span>
 					</button>
-				{/each}
-			{:else}
-				{#each offensiveOptions as action, index}
-					<button
-						on:click={() => play(index, false)}
-						class="rounded-xl border-2 border-red-400 bg-red-600/80 p-4 text-xl transition hover:bg-red-700/90 hover:shadow-lg hover:shadow-red-500/20 active:scale-95 active:bg-red-800"
-					>
-						{action}
-					</button>
-				{/each}
-			{/if}
-		</div>
 
-		<!-- Resultado da jogada -->
-		<div class="rounded-lg bg-gray-800/50 p-4 text-center" transition:fade>
-			{#if lastChoices.player}
-				<div class="grid grid-cols-3 gap-4 text-lg">
-					<div class="text-right text-blue-400">
-						<div class="font-bold">Você</div>
-						<div>{lastChoices.player}</div>
-					</div>
-					<div class="flex items-center justify-center text-2xl">
-						<div class="rounded-full bg-gray-700 p-2">⚔️</div>
-					</div>
-					<div class="text-left text-red-400">
-						<div class="font-bold">Oponente</div>
-						<div>{lastChoices.opponent}</div>
+					<div
+						id="musicDropdown"
+						class="absolute right-0 z-10 mt-2 hidden w-64 rounded-lg bg-gray-800 shadow-lg"
+					>
+						<div class="p-2">
+							{#each musicOptions as track}
+								<button
+									on:click={() => openMusicInNewTab(track.url)}
+									class="block w-full rounded px-4 py-2 text-left hover:bg-gray-700"
+								>
+									{track.name}
+								</button>
+							{/each}
+						</div>
 					</div>
 				</div>
-				<div class="mt-2 text-xl font-semibold text-yellow-300">{lastChoices.outcome}</div>
-			{/if}
-			<p class="mt-3 animate-bounce text-2xl font-bold">{resultMsg}</p>
-		</div>
-	</div>
+			</div>
 
-	<!-- Modal da Tabela -->
-	{#if showTableModal}
-		<div
-			class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
-			role="dialog"
-			aria-modal="true"
-			tabindex="-1"
-			on:keydown={(e) => (e.key === 'Escape' ? (showTableModal = false) : null)}
-			on:click={() => (showTableModal = false)}
-			transition:fade
-		>
+			<!-- Cabeçalho -->
+			<h1 class="font-orbitron mb-8 text-center text-5xl font-bold tracking-wide text-yellow-400">
+				OKIZEME SHOWDOWN
+			</h1>
+
+			<!-- Área de combate -->
+			<div class="mb-8 flex items-end justify-between">
+				<!-- Jogador -->
+				<div class="flex w-[45%] flex-col items-center">
+					<!-- Personagem do Jogador -->
+					<div
+						class="relative mb-2 h-32 w-32 transition-all duration-300 {playerHit
+							? 'animate-hit'
+							: ''}"
+					>
+						{#if playerSprite === 'hurt'}
+							<div class="absolute inset-0 flex items-center justify-center">
+								<div class="h-24 w-24 rounded-full bg-red-500/20"></div>
+							</div>
+							<svg class="h-full w-full" viewBox="0 0 100 100">
+								<circle cx="50" cy="40" r="20" fill="#3b82f6" />
+								<circle cx="40" cy="35" r="3" fill="white" />
+								<circle cx="60" cy="35" r="3" fill="white" />
+								<path
+									d="M40,50 Q50,55 60,50"
+									stroke="white"
+									stroke-width="2"
+									fill="none"
+									stroke-linecap="round"
+								/>
+								<rect x="35" y="65" width="30" height="15" rx="5" fill="#3b82f6" />
+								<rect x="30" y="80" width="40" height="10" rx="5" fill="#3b82f6" />
+								<rect x="25" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
+								<rect x="65" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
+							</svg>
+						{:else if playerSprite === 'attack'}
+							<svg class="h-full w-full" viewBox="0 0 100 100">
+								<circle cx="50" cy="40" r="20" fill="#3b82f6" />
+								<circle cx="40" cy="35" r="3" fill="white" />
+								<circle cx="60" cy="35" r="3" fill="white" />
+								<path
+									d="M40,50 Q50,55 60,50"
+									stroke="white"
+									stroke-width="2"
+									fill="none"
+									stroke-linecap="round"
+								/>
+								<rect x="45" y="65" width="20" height="15" rx="5" fill="#3b82f6" />
+								<rect x="40" y="80" width="30" height="10" rx="5" fill="#3b82f6" />
+								<rect
+									x="25"
+									y="60"
+									width="10"
+									height="40"
+									rx="5"
+									fill="#3b82f6"
+									transform="rotate(-20, 30, 80)"
+								/>
+								<rect
+									x="65"
+									y="60"
+									width="10"
+									height="40"
+									rx="5"
+									fill="#3b82f6"
+									transform="rotate(20, 70, 80)"
+								/>
+							</svg>
+						{:else if playerSprite === 'ready'}
+							<svg class="h-full w-full" viewBox="0 0 100 100">
+								<circle cx="50" cy="40" r="20" fill="#3b82f6" />
+								<circle cx="40" cy="35" r="3" fill="white" />
+								<circle cx="60" cy="35" r="3" fill="white" />
+								<path
+									d="M40,50 Q50,55 60,50"
+									stroke="white"
+									stroke-width="2"
+									fill="none"
+									stroke-linecap="round"
+								/>
+								<rect x="35" y="65" width="30" height="15" rx="5" fill="#3b82f6" />
+								<rect x="30" y="80" width="40" height="10" rx="5" fill="#3b82f6" />
+								<rect x="25" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
+								<rect x="65" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
+							</svg>
+						{:else}
+							<svg class="h-full w-full" viewBox="0 0 100 100">
+								<circle cx="50" cy="40" r="20" fill="#3b82f6" />
+								<circle cx="40" cy="35" r="3" fill="white" />
+								<circle cx="60" cy="35" r="3" fill="white" />
+								<path
+									d="M40,50 Q50,55 60,50"
+									stroke="white"
+									stroke-width="2"
+									fill="none"
+									stroke-linecap="round"
+								/>
+								<rect x="35" y="65" width="30" height="15" rx="5" fill="#3b82f6" />
+								<rect x="30" y="80" width="40" height="10" rx="5" fill="#3b82f6" />
+								<rect x="25" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
+								<rect x="65" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
+							</svg>
+						{/if}
+					</div>
+
+					<div class="mb-2 text-2xl font-bold text-blue-400">JOGADOR</div>
+					<div class="relative h-8 w-full rounded-full bg-gray-700 shadow-inner">
+						<div
+							class="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-500 ease-out"
+							class:shake={shakePlayer}
+							style={`width: ${(playerHP / maxHP) * 100}%`}
+						></div>
+						<div
+							class="absolute inset-0 flex items-center justify-center text-sm font-bold text-white"
+						>
+							{playerHP.toFixed(1)} HP
+						</div>
+					</div>
+				</div>
+
+				<!-- VS -->
+				<div class="mx-4 flex flex-col items-center p-4">
+					<div class="mt-2 w-[190px] pb-2 text-3xl font-semibold">
+						Rounds: {roundWins.player} × {roundWins.ai}
+					</div>
+					<div class="text-4xl font-bold text-red-500">VS</div>
+				</div>
+
+				<!-- Oponente -->
+				<div class="flex w-[45%] flex-col items-center">
+					<!-- Personagem do Oponente -->
+					<div
+						class="relative mb-2 h-32 w-32 transition-all duration-300 {opponentHit
+							? 'animate-hit'
+							: ''}"
+					>
+						{#if opponentSprite === 'hurt'}
+							<div class="absolute inset-0 flex items-center justify-center">
+								<div class="h-24 w-24 rounded-full bg-red-500/20"></div>
+							</div>
+							<svg class="h-full w-full" viewBox="0 0 100 100">
+								<circle cx="50" cy="40" r="20" fill="#ef4444" />
+								<circle cx="40" cy="35" r="3" fill="white" />
+								<circle cx="60" cy="35" r="3" fill="white" />
+								<path
+									d="M40,50 Q50,55 60,50"
+									stroke="white"
+									stroke-width="2"
+									fill="none"
+									stroke-linecap="round"
+								/>
+								<rect x="35" y="65" width="30" height="15" rx="5" fill="#ef4444" />
+								<rect x="30" y="80" width="40" height="10" rx="5" fill="#ef4444" />
+								<rect x="25" y="60" width="10" height="30" rx="5" fill="#ef4444" />
+								<rect x="65" y="60" width="10" height="30" rx="5" fill="#ef4444" />
+							</svg>
+						{:else if opponentSprite === 'attack'}
+							<svg class="h-full w-full" viewBox="0 0 100 100">
+								<circle cx="50" cy="40" r="20" fill="#ef4444" />
+								<circle cx="40" cy="35" r="3" fill="white" />
+								<circle cx="60" cy="35" r="3" fill="white" />
+								<path
+									d="M40,50 Q50,55 60,50"
+									stroke="white"
+									stroke-width="2"
+									fill="none"
+									stroke-linecap="round"
+								/>
+								<rect x="45" y="65" width="20" height="15" rx="5" fill="#ef4444" />
+								<rect x="40" y="80" width="30" height="10" rx="5" fill="#ef4444" />
+								<rect
+									x="25"
+									y="60"
+									width="10"
+									height="40"
+									rx="5"
+									fill="#ef4444"
+									transform="rotate(-20, 30, 80)"
+								/>
+								<rect
+									x="65"
+									y="60"
+									width="10"
+									height="40"
+									rx="5"
+									fill="#ef4444"
+									transform="rotate(20, 70, 80)"
+								/>
+							</svg>
+						{:else if opponentSprite === 'ready'}
+							<svg class="h-full w-full" viewBox="0 0 100 100">
+								<circle cx="50" cy="40" r="20" fill="#ef4444" />
+								<circle cx="40" cy="35" r="3" fill="white" />
+								<circle cx="60" cy="35" r="3" fill="white" />
+								<path
+									d="M40,50 Q50,55 60,50"
+									stroke="white"
+									stroke-width="2"
+									fill="none"
+									stroke-linecap="round"
+								/>
+								<rect x="35" y="65" width="30" height="15" rx="5" fill="#ef4444" />
+								<rect x="30" y="80" width="40" height="10" rx="5" fill="#ef4444" />
+								<rect x="25" y="60" width="10" height="30" rx="5" fill="#ef4444" />
+								<rect x="65" y="60" width="10" height="30" rx="5" fill="#ef4444" />
+							</svg>
+						{:else}
+							<svg class="h-full w-full" viewBox="0 0 100 100">
+								<circle cx="50" cy="40" r="20" fill="#ef4444" />
+								<circle cx="40" cy="35" r="3" fill="white" />
+								<circle cx="60" cy="35" r="3" fill="white" />
+								<path
+									d="M40,50 Q50,55 60,50"
+									stroke="white"
+									stroke-width="2"
+									fill="none"
+									stroke-linecap="round"
+								/>
+								<rect x="35" y="65" width="30" height="15" rx="5" fill="#ef4444" />
+								<rect x="30" y="80" width="40" height="10" rx="5" fill="#ef4444" />
+								<rect x="25" y="60" width="10" height="30" rx="5" fill="#ef4444" />
+								<rect x="65" y="60" width="10" height="30" rx="5" fill="#ef4444" />
+							</svg>
+						{/if}
+					</div>
+
+					<div class="mb-2 text-2xl font-bold text-red-400">OPONENTE</div>
+					<div class="relative h-8 w-full rounded-full bg-gray-700 shadow-inner">
+						<div
+							class="h-full rounded-full bg-gradient-to-r from-red-500 to-red-600 transition-all duration-500 ease-out"
+							class:shake={shakeOpponent}
+							style={`width: ${(opponentHP / maxHP) * 100}%`}
+						></div>
+						<div
+							class="absolute inset-0 flex items-center justify-center text-sm font-bold text-white"
+						>
+							{opponentHP.toFixed(1)} HP
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Modo de jogo atual -->
+			<h2 class="mb-6 text-center text-2xl font-semibold text-gray-300">
+				{isDefending ? 'ESCOLHA SUA DEFESA' : 'ESCOLHA SEU ATAQUE'}
+			</h2>
+
+			<!-- Ações -->
+			<div class="mb-8 grid h-[280px] grid-cols-2 gap-4">
+				{#if isDefending}
+					{#each defensiveOptions as action, index}
+						<button
+							on:click={() => play(index, true)}
+							class="rounded-xl border-2 border-blue-400 bg-blue-600/80 p-4 text-xl transition hover:bg-blue-700/90 hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 active:bg-blue-800"
+						>
+							{action}
+						</button>
+					{/each}
+				{:else}
+					{#each offensiveOptions as action, index}
+						<button
+							on:click={() => play(index, false)}
+							class="rounded-xl border-2 border-red-400 bg-red-600/80 p-4 text-xl transition hover:bg-red-700/90 hover:shadow-lg hover:shadow-red-500/20 active:scale-95 active:bg-red-800"
+						>
+							{action}
+						</button>
+					{/each}
+				{/if}
+			</div>
+
+			<!-- Resultado da jogada -->
+			<div class="rounded-lg bg-gray-800/50 p-4 text-center" transition:fade>
+				{#if lastChoices.player}
+					<div class="grid grid-cols-3 gap-4 text-lg">
+						<div class="text-right text-blue-400">
+							<div class="font-bold">Você</div>
+							<div class="text-3xl font-semibold">{lastChoices.player}</div>
+							<!-- Texto maior e semibold -->
+						</div>
+						<div class="flex items-center justify-center text-2xl">
+							<div class="rounded-full bg-gray-700 p-2">⚔️</div>
+						</div>
+						<div class="text-left text-red-400">
+							<div class="font-bold">Oponente</div>
+							<div class="text-3xl font-semibold">{lastChoices.opponent}</div>
+							<!-- Texto maior e semibold -->
+						</div>
+					</div>
+					<div class="mt-2 text-xl font-semibold text-yellow-300">{lastChoices.outcome}</div>
+				{/if}
+				<p class="mt-3 animate-bounce text-2xl font-bold">{resultMsg}</p>
+			</div>
+		</div>
+
+		<!-- Modal da Tabela -->
+		{#if showTableModal}
 			<div
-				class="relative w-[60%] overflow-auto rounded-2xl bg-gray-800 p-6 text-white shadow-2xl"
-				on:click|stopPropagation
+				class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+				role="dialog"
+				aria-modal="true"
+				tabindex="-1"
+				on:keydown={(e) => (e.key === 'Escape' ? (showTableModal = false) : null)}
+				on:click={() => (showTableModal = false)}
+				transition:fade
 			>
-				<button
-					on:click={() => (showTableModal = false)}
-					class="absolute top-4 right-4 rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600"
+				<div
+					class="relative w-[60%] overflow-auto rounded-2xl bg-gray-800 p-6 text-white shadow-2xl"
+					on:click|stopPropagation
 				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
+					<button
+						on:click={() => (showTableModal = false)}
+						class="absolute top-4 right-4 rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600"
 					>
-						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-					</svg>
-				</button>
-				<Tabela />
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-6 w-6"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+						</svg>
+					</button>
+					<Tabela />
+				</div>
 			</div>
-		</div>
-	{/if}
+		{/if}
+	</div>
 </div>
 
 <style>
+	/* Container principal com tamanho fixo em relação à viewport */
+	.fixed-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		overflow: auto;
+	}
+
+	/* Cardbox central com tamanho fixo */
+	.game-card {
+		min-height: 80vh;
+		min-width: 90vw;
+		max-height: 80vh;
+		overflow-y: auto;
+	}
+
 	.bg {
 		background-image: url('https://pbs.twimg.com/ext_tw_video_thumb/1537465478867722241/pu/img/JAQ7N8tFzPWNnQJ-.jpg');
 		background-size: cover;
@@ -648,6 +669,31 @@
 
 	.shake {
 		animation: shake 0.4s ease-in-out;
+	}
+
+	/* Nova animação para tremer a tela */
+	@keyframes screen-shake {
+		0%,
+		100% {
+			transform: translateX(0) translateY(0);
+		}
+		10%,
+		30%,
+		50%,
+		70%,
+		90% {
+			transform: translateX(-10px) translateY(-5px);
+		}
+		20%,
+		40%,
+		60%,
+		80% {
+			transform: translateX(10px) translateY(5px);
+		}
+	}
+
+	.animate-screen-shake {
+		animation: screen-shake 0.3s ease-in-out;
 	}
 
 	@keyframes pulse {

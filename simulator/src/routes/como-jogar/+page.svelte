@@ -19,7 +19,7 @@
 	<!-- Conteúdo centralizado -->
 	<div class="flex h-full flex-col items-center justify-center px-4">
 		<div
-			class="h-[85%] w-full max-w-6xl overflow-auto rounded-2xl border-4 border-blue-600 bg-[rgba(0,0,0,0.9)] p-8 shadow-2xl backdrop-blur-md"
+			class="h-[85%] w-full overflow-auto rounded-2xl border-4 border-blue-600 bg-[rgba(0,0,0,0.9)] p-8 shadow-2xl backdrop-blur-md"
 		>
 			<!-- Título "Regras" no topo -->
 			<h1 class="font-orbitron mb-6 text-center text-4xl font-bold text-white">COMO JOGAR</h1>
@@ -27,7 +27,7 @@
 			<!-- Seção "Como Funciona" centralizada -->
 			<div class="mb-8 rounded-lg bg-[rgba(20,20,20,0.7)] p-6 text-center">
 				<h2 class="font-orbitron mb-4 text-2xl font-bold text-white">FUNCIONAMENTO</h2>
-				<div class="mx-auto max-w-3xl space-y-4">
+				<div class="mx-auto max-w-3xl space-y-4 text-lg font-semibold">
 					<p>
 						Nesta simulação, você participará de interações de combate inspiradas em jogos de luta,
 						semelhantes a uma partida de "Pedra, Papel e Tesoura", mas com mais opções e
@@ -68,7 +68,7 @@
 					<h2 class="font-orbitron mb-4 text-center text-2xl font-bold text-blue-400">
 						AÇÕES DEFENSIVAS
 					</h2>
-					<ul class="space-y-3 text-center text-lg font-medium text-blue-300">
+					<ul class="space-y-3 text-center text-lg font-semibold text-blue-300">
 						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">1. Defender</li>
 						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">2. Guard-jump</li>
 						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">3. Botão</li>
@@ -82,12 +82,12 @@
 
 			<!-- Seção da Tabela -->
 			<div class="mb-6 rounded-lg bg-[rgba(20,20,20,0.7)] p-4">
-				<h3 class="font-orbitron mb-4 text-center text-xl font-bold text-white">
+				<h3 class="font-orbitron mb-4 text-center text-3xl font-bold text-white">
 					TABELA DE INTERAÇÕES
 				</h3>
 
 				<!-- Instruções sobre como ler a tabela -->
-				<div class="mb-6 text-center">
+				<div class="mb-6 text-center text-lg font-semibold">
 					<p class="mt-4 text-center">
 						A tabela abaixo detalha todas as interações possíveis entre ações ofensivas e
 						defensivas.

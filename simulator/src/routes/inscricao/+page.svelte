@@ -2,8 +2,8 @@
 	import { onMount } from 'svelte';
 
 	let experiencia = '';
-	let nivelLuta = '3';
-	let nivelEstocastico = '3';
+	let nivelLuta = '';
+	let nivelEstocastico = '';
 
 	// Verifica se já há dados salvos no localStorage
 	onMount(() => {
@@ -16,19 +16,27 @@
 	// Função para salvar dados, com validação
 	function salvarDados() {
 		if (!experiencia) {
-			alert('Por favor, responda a pergunta sobre jogos de luta antes de prosseguir.');
-			return; // Impede que o usuário avance
+			alert('Por favor, responda se já jogou jogos de luta antes.');
+			return;
+		}
+		if (!nivelLuta) {
+			alert('Por favor, selecione seu nível de conhecimento em jogos de luta.');
+			return;
+		}
+		if (!nivelEstocastico) {
+			alert('Por favor, selecione seu nível de conhecimento sobre modelos estocásticos.');
+			return;
 		}
 
 		const dadosUsuario = {
 			experiencia,
 			nivelLuta: parseInt(nivelLuta),
 			nivelEstocastico: parseInt(nivelEstocastico),
-			jogadas: [] // campo reservado para uso posterior
+			jogadas: []
 		};
 
 		localStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario));
-		window.location.href = '/okizeme'; // Redireciona após salvar
+		window.location.href = '/okizeme';
 	}
 </script>
 
@@ -42,7 +50,7 @@
 	<!-- Conteúdo centralizado -->
 	<div class="flex h-full flex-col items-center justify-center px-4 text-center">
 		<div
-			class="h-[70%] w-full max-w-3xl overflow-auto rounded-2xl border-4 border-blue-600 bg-[rgba(0,0,0,0.8)] p-8 shadow-2xl backdrop-blur-md"
+			class="h-[70%] w-[80%] overflow-auto rounded-2xl border-4 border-blue-600 bg-[rgba(0,0,0,0.8)] p-8 shadow-2xl backdrop-blur-md"
 		>
 			<h2
 				class="mb-6 text-3xl font-bold text-cyan-300"
@@ -51,15 +59,19 @@
 				Antes de começarmos, precisamos de algumas informações!
 			</h2>
 
-			<!-- Subtexto -->
-			<p class="text-sm text-gray-300">Não se preocupe, isso não muda a dificuldade do jogo ;)</p>
+			<p class="text-sm text-gray-300">Todos os campos são obrigatórios</p>
+			<br />
+			<br />
 
 			<form class="space-y-6 text-left text-white">
 				<div>
-					<label class="mb-2 block font-semibold">Você já jogou jogos de luta antes?</label>
+					<label class="mb-2 block text-center text-xl font-semibold"
+						>Você já jogou jogos de luta antes?*</label
+					>
 					<select
 						bind:value={experiencia}
 						class="bg-opacity-70 w-full rounded-lg border border-gray-500 bg-black p-3 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+						required
 					>
 						<option value="">Selecione...</option>
 						<option value="sim">Sim</option>
@@ -68,31 +80,40 @@
 				</div>
 
 				<div>
-					<label class="mb-2 block font-semibold">
-						Qual seu nível de conhecimento em jogos de luta? (1 a 5)
+					<label class="mb-2 block text-center text-xl font-semibold">
+						Qual seu nível de conhecimento em jogos de luta?*
 					</label>
-					<div class="flex justify-between">
-						<span>Nunca joguei</span>
-						<span>Já ouvi falar</span>
-						<span>Joguei</span>
-						<span>Jogo bastante</span>
-						<span>Jogo todo dia</span>
-					</div>
-					<input type="range" min="1" max="5" bind:value={nivelLuta} class="w-full" />
+					<select
+						bind:value={nivelLuta}
+						class="bg-opacity-70 w-full rounded-lg border border-gray-500 bg-black p-3 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+						required
+					>
+						<option value="">Selecione...</option>
+						<option value="1">1 - Nunca joguei</option>
+						<option value="2">2 - Já ouvi falar</option>
+						<option value="3">3 - Joguei</option>
+						<option value="4">4 - Jogo bastante</option>
+						<option value="5">5 - Jogo todo dia</option>
+					</select>
 				</div>
+				<br />
 
 				<div>
-					<label class="mb-2 block font-semibold">
-						Qual seu nível de conhecimento sobre modelos estocásticos? (1 a 5)
+					<label class="mb-2 block text-center text-xl font-semibold">
+						Qual seu nível de conhecimento sobre modelos estocásticos?*
 					</label>
-					<div class="flex justify-between">
-						<span>Não conheço</span>
-						<span>Já ouvi falar</span>
-						<span>Conheço</span>
-						<span>Conheço bem</span>
-						<span>Conheço muito bem</span>
-					</div>
-					<input type="range" min="1" max="5" bind:value={nivelEstocastico} class="w-full" />
+					<select
+						bind:value={nivelEstocastico}
+						class="bg-opacity-70 w-full rounded-lg border border-gray-500 bg-black p-3 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+						required
+					>
+						<option value="">Selecione...</option>
+						<option value="1">1 - Não conheço</option>
+						<option value="2">2 - Já ouvi falar</option>
+						<option value="3">3 - Conheço</option>
+						<option value="4">4 - Conheço bem</option>
+						<option value="5">5 - Conheço muito bem</option>
+					</select>
 				</div>
 
 				<button

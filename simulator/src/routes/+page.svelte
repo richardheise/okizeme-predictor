@@ -24,7 +24,7 @@
 				Bem-vindo ao futuro!<br />Sua luta começa aqui.
 			</h1>
 
-			<p class="text-base leading-relaxed font-semibold text-gray-200 md:text-xl">
+			<p class="text-lg leading-relaxed font-semibold text-gray-200 md:text-xl">
 				Este é um <span class="text-red-400">Simulador de Okizeme</span>, onde você enfrentará nossa
 				inteligência artificial em combates intensos.<br /><br />
 				Cada jogador possui <span class="text-yellow-300">8 pontos de vida</span>. O vencedor será

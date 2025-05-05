@@ -28,7 +28,7 @@
 			</h2>
 
 			<!-- Texto de explicação -->
-			<p class="mb-4 text-lg text-white">
+			<p class="mb-4 text-lg font-semibold text-white">
 				Em qualquer jogo de luta, se um jogador acertar um golpe específico no oponente, este pode
 				ser derrubado. Durante esse estado de derrubada, o jogador que atacou ganha uma vantagem
 				significativa e pode ditar a próxima ação — uma situação conhecida como okizeme (uma junção
@@ -38,18 +38,21 @@
 				defensor precisam recorrer a estratégias de adivinhação.
 			</p>
 
-			<p class="text-lg text-gray-300">
+			<p class="text-lg font-semibold text-gray-300">
 				Neste simulador, você assumirá o papel de um jogador de Ken em uma partida espelhada.
 				Buscando adivinhar corretamente as ações do seu oponente tanto na defesa quanto no ataque.
 			</p>
 
-			<p class="text-lg text-gray-300">
+			<br />
+
+			<p class="text-lg font-semibold text-gray-300">
 				Será um conjunto de partidas FT10 (Quem Vencer 10). Cada partida é composta por uma melhor
 				de 2 rounds. Ou seja, se prepare para jogar bastante! Você terá uma barra de vida de 8
 				pontos, assim como seu oponente. Caso vença a interação de okizeme, será seu turno de
 				atacar! Caso perca, será a vez do seu oponente. Caso empate, ambos jogadores terão 50% de
 				chance de voltar à ofensiva!
 			</p>
+			<br />
 
 			<p class="text-lg text-gray-300">
 				Se precisar de uma explicação visual, recomendamos o shorts abaixo:

@@ -47,7 +47,9 @@
 				<td class="border border-blue-400 bg-orange-200 px-4 py-2 text-black"
 					>Perde (Recebe 1 de dano)</td
 				>
-				<td class="border border-blue-400 bg-green-400 px-4 py-2">Vence (Aplica 3 de dano)</td>
+				<td class="border border-blue-400 bg-green-400 px-4 py-2 text-black"
+					>Vence (Aplica 3 de dano)</td
+				>
 				<td class="border border-blue-400 bg-orange-500 px-4 py-2">Perde (Recebe 3.5 de dano)</td>
 				<td class="border border-blue-400 bg-green-500 px-4 py-2">Vence (Aplica 3.5 de dano)</td>
 			</tr>
@@ -98,7 +100,9 @@
 				<td class="border border-blue-400 bg-white px-4 py-2 text-black">Perde (não recebe dano)</td
 				>
 				<td class="border border-blue-400 bg-orange-400 px-4 py-2">Perde (Recebe 3 de dano)</td>
-				<td class="border border-blue-400 bg-green-400 px-4 py-2">Vence (Aplica 3 de dano)</td>
+				<td class="border border-blue-400 bg-green-400 px-4 py-2 text-black"
+					>Vence (Aplica 3 de dano)</td
+				>
 				<td class="border border-blue-400 bg-green-500 px-4 py-2">Vence (Aplica 3.5 de dano)</td>
 				<td class="border border-blue-400 bg-white px-4 py-2 text-black">Perde (não recebe dano)</td
 				>
@@ -108,3 +112,39 @@
 		</tbody>
 	</table>
 </div>
+
+<style>
+	.bg-blue-800 {
+		background-color: #1e40af;
+	}
+	.bg-red-500 {
+		background-color: #ef4444;
+	}
+	.bg-green-200 {
+		background-color: #bbf7d0;
+	}
+	.bg-green-300 {
+		background-color: #86efac;
+	}
+	.bg-green-400 {
+		background-color: #4ade80;
+	}
+	.bg-green-500 {
+		background-color: #22c55e;
+	}
+	.bg-orange-200 {
+		background-color: #fed7aa;
+	}
+	.bg-orange-400 {
+		background-color: #fb923c;
+	}
+	.bg-orange-500 {
+		background-color: #f97316;
+	}
+	.bg-white {
+		background-color: #ffffff;
+	}
+	.bg-black\/70 {
+		background-color: rgba(0, 0, 0, 0.7);
+	}
+</style>
