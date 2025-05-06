@@ -4,7 +4,7 @@ import os
 
 class AI:
 
-    def __init__(self, rvr: dict, markov_order=5) -> None:
+    def __init__(self, rvr: dict) -> None:
 
         if not rvr:
             return
@@ -13,30 +13,15 @@ class AI:
 
         self.ai_actions = list(rvr.keys())
         self.player_actions = list(rvr[self.ai_actions[0]].keys())
-        self.multi_markov = markov.MultiMarkovChain(markov_order, self.player_actions)
 
-    def from_files(self, rvr_path: str, markov_path: str = "", markov_order=5):
-
-        # Load RVR dictionary
-        if rvr_path == "":
-            raise ValueError("RVR path is required")
-        
-        with open(rvr_path, "r") as f:
-            self.rewards = json.load(f)
-
-        self.ai_actions = list(self.rewards.keys())
-        self.player_actions = list(self.rewards[self.ai_actions[0]].keys())
-
-        # Load Markov chains
-        if markov_path != "":
+    def load_multi_markov(self, markov_order=5, markov_dicts=[]) -> None:
+        if len(markov_dicts) > 0:
             markov_weights = []
-            for i in range(markov_order):
-                try:
-                    with open(f"{markov_path}/markov_{i + 1}.json", "r") as f:
-                        markov_weights.append(json.load(f))
-                except FileNotFoundError:
-                    raise ValueError(f"Markov file {markov_path}/markov_{i + 1}.json not found")
-            self.multi_markov = markov.MultiMarkovChain(markov_order, self.player_actions, markov_weights)
+            correct_predictions = []
+            for markov_dict in markov_dicts:
+                markov_weights.append(markov_dict["weights"])
+                correct_predictions.append(markov_dict["correct_predictions"])
+            self.multi_markov = markov.MultiMarkovChain(markov_order, self.player_actions, markov_weights, correct_predictions)
         else:
             self.multi_markov = markov.MultiMarkovChain(markov_order, self.player_actions)
 
@@ -46,8 +31,9 @@ class AI:
 
         markov_weights = self.multi_markov.get_markov_chains()
         for i, markov_chain in enumerate(markov_weights):
+            markov_dict = {"weights": markov_chain[0], "correct_predictions": markov_chain[1]}
             with open(f"{path}/markov_{i + 1}.json", "w") as f:
-                json.dump(markov_chain, f, indent=4)
+                json.dump(markov_dict, f, indent=4)
 
     def save_rvr(self, path):
         if not os.path.exists(path):
@@ -83,8 +69,5 @@ class AI:
     def update(self, action):
         self.multi_markov.update_matrix(action)
 
-    def calculate_rewards(self, player_action, ai_action):
-        ai_reward = self.rewards[ai_action][player_action]
-
-        return -ai_reward, ai_reward
-        
+    def calculate_player_reward(self, player_action, ai_action):
+        return -self.rewards[ai_action][player_action]

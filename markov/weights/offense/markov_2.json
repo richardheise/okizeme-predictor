@@ -1,1682 +1,671 @@
 {
-    "Block": {
-        "Block": {
-            "prob": 0.3853605089831541,
-            "n_obs": 3.0951
-        },
-        "Guard_jump": {
-            "prob": 0.20619545052728558,
-            "n_obs": 1.6561000000000001
-        },
-        "Button": {
-            "prob": 0.08168880809791201,
-            "n_obs": 0.6561000000000001
-        },
+    "weights": {
         "Throw": {
-            "prob": 0.08168880809791201,
-            "n_obs": 0.6561000000000001
+            "Throw": {
+                "prob": 0.34545454545454546,
+                "n_obs": 1.9
+            },
+            "Delayed_tc": {
+                "prob": 0.16363636363636364,
+                "n_obs": 0.9
+            },
+            "Meaty_high": {
+                "prob": 0.16363636363636364,
+                "n_obs": 0.9
+            },
+            "Meaty_low": {
+                "prob": 0.16363636363636364,
+                "n_obs": 0.9
+            },
+            "Shimmy_lp": {
+                "prob": 0.16363636363636364,
+                "n_obs": 0.9
+            }
         },
-        "Reversal": {
-            "prob": 0.08168880809791201,
-            "n_obs": 0.6561000000000001
+        "Delayed_tc": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
         },
-        "Parry_high": {
-            "prob": 0.08168880809791201,
-            "n_obs": 0.6561000000000001
+        "Meaty_high": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
         },
-        "Parry_low": {
-            "prob": 0.08168880809791201,
-            "n_obs": 0.6561000000000001
+        "Meaty_low": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Shimmy_lp": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "ThrowThrow": {
+            "Throw": {
+                "prob": 0.7805883571250526,
+                "n_obs": 6.12579511
+            },
+            "Delayed_tc": {
+                "prob": 0.0548529107187369,
+                "n_obs": 0.43046721000000016
+            },
+            "Meaty_high": {
+                "prob": 0.0548529107187369,
+                "n_obs": 0.43046721000000016
+            },
+            "Meaty_low": {
+                "prob": 0.0548529107187369,
+                "n_obs": 0.43046721000000016
+            },
+            "Shimmy_lp": {
+                "prob": 0.0548529107187369,
+                "n_obs": 0.43046721000000016
+            }
+        },
+        "ThrowDelayed_tc": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "ThrowMeaty_high": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "ThrowMeaty_low": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "ThrowShimmy_lp": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Delayed_tcThrow": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Delayed_tcDelayed_tc": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Delayed_tcMeaty_high": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Delayed_tcMeaty_low": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Delayed_tcShimmy_lp": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Meaty_highThrow": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Meaty_highDelayed_tc": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Meaty_highMeaty_high": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Meaty_highMeaty_low": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Meaty_highShimmy_lp": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Meaty_lowThrow": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Meaty_lowDelayed_tc": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Meaty_lowMeaty_high": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Meaty_lowMeaty_low": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Meaty_lowShimmy_lp": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Shimmy_lpThrow": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Shimmy_lpDelayed_tc": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Shimmy_lpMeaty_high": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Shimmy_lpMeaty_low": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
+        },
+        "Shimmy_lpShimmy_lp": {
+            "Throw": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Delayed_tc": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_high": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Meaty_low": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            },
+            "Shimmy_lp": {
+                "prob": 0.2,
+                "n_obs": 1.0
+            }
         }
     },
-    "Guard_jump": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Button": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Throw": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Reversal": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_high": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_low": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "BlockBlock": {
-        "Block": {
-            "prob": 0.8526248318670572,
-            "n_obs": 7.94108867905351
-        },
-        "Guard_jump": {
-            "prob": 0.024562528022157176,
-            "n_obs": 0.22876792454961012
-        },
-        "Button": {
-            "prob": 0.024562528022157176,
-            "n_obs": 0.22876792454961012
-        },
-        "Throw": {
-            "prob": 0.024562528022157176,
-            "n_obs": 0.22876792454961012
-        },
-        "Reversal": {
-            "prob": 0.024562528022157176,
-            "n_obs": 0.22876792454961012
-        },
-        "Parry_high": {
-            "prob": 0.024562528022157176,
-            "n_obs": 0.22876792454961012
-        },
-        "Parry_low": {
-            "prob": 0.024562528022157176,
-            "n_obs": 0.22876792454961012
-        }
-    },
-    "BlockGuard_jump": {
-        "Block": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Guard_jump": {
-            "prob": 0.2602739726027397,
-            "n_obs": 1.9
-        },
-        "Button": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Throw": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Reversal": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Parry_high": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Parry_low": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        }
-    },
-    "BlockButton": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "BlockThrow": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "BlockReversal": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "BlockParry_high": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "BlockParry_low": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Guard_jumpBlock": {
-        "Block": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Guard_jump": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Button": {
-            "prob": 0.2602739726027397,
-            "n_obs": 1.9
-        },
-        "Throw": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Reversal": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Parry_high": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Parry_low": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        }
-    },
-    "Guard_jumpGuard_jump": {
-        "Block": {
-            "prob": 0.2602739726027397,
-            "n_obs": 1.9
-        },
-        "Guard_jump": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Button": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Throw": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Reversal": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Parry_high": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        },
-        "Parry_low": {
-            "prob": 0.1232876712328767,
-            "n_obs": 0.9
-        }
-    },
-    "Guard_jumpButton": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Guard_jumpThrow": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Guard_jumpReversal": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Guard_jumpParry_high": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Guard_jumpParry_low": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ButtonBlock": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ButtonGuard_jump": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ButtonButton": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ButtonThrow": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ButtonReversal": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ButtonParry_high": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ButtonParry_low": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ThrowBlock": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ThrowGuard_jump": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ThrowButton": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ThrowThrow": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ThrowReversal": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ThrowParry_high": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ThrowParry_low": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ReversalBlock": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ReversalGuard_jump": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ReversalButton": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ReversalThrow": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ReversalReversal": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ReversalParry_high": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "ReversalParry_low": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_highBlock": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_highGuard_jump": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_highButton": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_highThrow": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_highReversal": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_highParry_high": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_highParry_low": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_lowBlock": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_lowGuard_jump": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_lowButton": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_lowThrow": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_lowReversal": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_lowParry_high": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    },
-    "Parry_lowParry_low": {
-        "Block": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Guard_jump": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Button": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Throw": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Reversal": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_high": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        },
-        "Parry_low": {
-            "prob": 0.14285714285714285,
-            "n_obs": 1.0
-        }
-    }
+    "correct_predictions": [
+        1,
+        1,
+        1,
+        1,
+        1
+    ]
 }

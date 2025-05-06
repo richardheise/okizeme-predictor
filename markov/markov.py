@@ -79,13 +79,17 @@ class MarkovChain():
 
 class MultiMarkovChain():
 
-    def __init__(self, order, actions, markov_weights=None) -> None:
+    def __init__(self, order, actions, markov_weights=None, correct_predictions=None) -> None:
         self.order = order
         self.markov_chains = []
         self.curr_round = 0
-        self.correct_predictions = [[] for _ in range(self.order)]
         self.last_predictions = [None] * self.order
         
+        if correct_predictions is None:
+            self.correct_predictions = [[] for _ in range(self.order)]
+        else:
+            self.correct_predictions = correct_predictions
+
         for i in range(order):
             if markov_weights is None:
                 self.markov_chains.append(MarkovChain(i + 1, actions))
@@ -93,7 +97,7 @@ class MultiMarkovChain():
                 self.markov_chains.append(MarkovChain(i + 1, actions, markov_weights[i]))
 
     def get_markov_chains(self):
-        return [markov_chain.get_markov_matrix() for markov_chain in self.markov_chains]
+        return [(markov_chain.get_markov_matrix(), self.correct_predictions[i]) for i, markov_chain in enumerate(self.markov_chains)]
 
     def predict(self):
         for i, markov_chain in enumerate(self.markov_chains):

@@ -1,0 +1,143 @@
+import rvr
+import json
+import os
+
+class OkizemeAI:
+
+    AI_DEFENDING = 0
+    PLAYER_DEFENDING = 1
+
+    def __init__(self, rvr_path:str, markov_order=5, 
+                 markov_path="", save_results=True) -> None:
+        
+        if not os.path.exists(rvr_path):
+            raise ValueError(f"RVR path {rvr_path} does not exist") 
+        
+        # Load RVR dictionary
+        rvr_dict = None
+        with open(rvr_path, "r") as f:
+            rvr_dict = json.load(f)
+
+        # Index dictionaries for attack and defense with the RVR values
+        offense_moves = rvr_dict["offense_moves"]
+        defense_moves = rvr_dict["defense_moves"]
+        rvr_values = rvr_dict["rvr_values"]
+
+        offense_dict = {}
+        for i, offense_move in enumerate(offense_moves):
+            offense_dict[offense_move] = {}
+            for j, defense_move in enumerate(defense_moves):
+                offense_dict[offense_move][defense_move] = rvr_values[i][j]
+
+        defense_dict = {}
+        for i, defense_move in enumerate(defense_moves):
+            defense_dict[defense_move] = {}
+            for j, offense_move in enumerate(offense_moves):
+                defense_dict[defense_move][offense_move] = -rvr_values[j][i]
+
+        print("Loaded RVR values:")
+        print("Offense RVR:")
+        print(offense_dict)
+
+        print("Defense RVR:")
+        print(defense_dict)
+        
+        # Initialize AI with the RVR values
+        self.offense_predictor = rvr.AI(defense_dict)
+        self.defense_predictor = rvr.AI(offense_dict)
+
+        # Load Markov chains
+        offense_markov_weights = os.path.join(markov_path, "offense")
+        defense_markov_weights = os.path.join(markov_path, "defense")
+        multi_markov_dicts = [[], []]
+        for weights_path, markov_dicts in zip([offense_markov_weights, defense_markov_weights], multi_markov_dicts):
+            for i in range(markov_order):
+                try:
+                    with open(f"{weights_path}/markov_{i + 1}.json", "r") as f:
+                        markov_dict = json.load(f)
+                        markov_dicts.append(markov_dict)
+                except FileNotFoundError:
+                    print(f"Markov file {weights_path}/markov_{i + 1}.json not found. Loading Markov without weights.")
+                    markov_dicts.clear()
+                    break
+        
+        self.offense_predictor.load_multi_markov(markov_order, multi_markov_dicts[0])
+        self.defense_predictor.load_multi_markov(markov_order, multi_markov_dicts[1])
+
+        print("Loaded Markov chains:")
+        print(f"Offense Markov: {len(self.offense_predictor.multi_markov.get_markov_chains())}")
+        print(f"Defense Markov: {len(self.defense_predictor.multi_markov.get_markov_chains())}")
+
+        self.curr_defender = None
+
+    def set_defender(self, defender:int):
+        if defender not in [self.AI_DEFENDING, self.PLAYER_DEFENDING]:
+            raise ValueError("Defender must be either AI_DEFENDING or PLAYER_DEFENDING")
+        
+        self.curr_defender = defender
+
+    def change_sides(self):
+        if self.curr_defender is None:
+            raise ValueError("Initial defender must be set before changing sides")
+        
+        self.curr_defender = abs(self.curr_defender - 1)
+
+    def predict(self):
+
+        if self.curr_defender is None:
+            return None
+        
+        if self.curr_defender == self.AI_DEFENDING:
+            pred_offense, ai_defense = self.offense_predictor.predict_action()
+            print(f"AI predicted possible offense actions: {pred_offense}")
+            return ai_defense
+        
+        elif self.curr_defender == self.PLAYER_DEFENDING:
+            pred_defense, ai_offense = self.defense_predictor.predict_action()
+            print(f"AI predicted possible defense actions: {pred_defense}")
+            return ai_offense
+        
+    def get_damage(self, offense_action, defense_action) -> tuple[float, float]:
+        """
+        Returns:
+            Tuple[AI damage, Player damage]
+        """
+
+        if self.curr_defender == self.AI_DEFENDING:
+            player_reward = self.offense_predictor.calculate_player_reward(offense_action, defense_action)
+        elif self.curr_defender == self.PLAYER_DEFENDING:
+            player_reward = self.defense_predictor.calculate_player_reward(defense_action, offense_action)
+        else:
+            raise ValueError("Defender must be set before calculating damage")
+        
+        if player_reward < 0:
+            return 0.0, -player_reward
+        else:
+            return player_reward, 0.0
+        
+    def get_player_actions(self):
+        if self.curr_defender == self.AI_DEFENDING:
+            return self.offense_predictor.get_player_actions()
+        elif self.curr_defender == self.PLAYER_DEFENDING:
+            return self.defense_predictor.get_player_actions()
+        else:
+            raise ValueError("Defender must be set before getting player actions")
+
+    def update(self, action_taken:str):
+        if self.curr_defender == self.AI_DEFENDING:
+            self.offense_predictor.update(action_taken)
+        elif self.curr_defender == self.PLAYER_DEFENDING:
+            self.defense_predictor.update(action_taken)
+
+    def save_weights(self, path:str):
+        offense_path = os.path.join(path, "offense")
+        defense_path = os.path.join(path, "defense")
+        
+        if not os.path.exists(offense_path):
+            os.makedirs(offense_path)
+        if not os.path.exists(defense_path):
+            os.makedirs(defense_path)
+
+        self.offense_predictor.save_weights(offense_path)
+        self.defense_predictor.save_weights(defense_path)
+            
