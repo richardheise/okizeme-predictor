@@ -1,6 +1,6 @@
 import okizeme_ai
 
-LOAD_WEIGHTS = False
+LOAD_WEIGHTS = True
 SAVE_RESULTS = True
 
 NUM_ROUNDS = 1
@@ -84,5 +84,7 @@ if __name__ == "__main__":
 
             input("\n=====================\n")
 
-    if not LOAD_WEIGHTS:
+    if LOAD_WEIGHTS:
         ai.save_weights(MARKOV_PATH)
+
+    ai.export_results("./results", 0, 0)

@@ -1,6 +1,4 @@
 import markov
-import json
-import os
 
 class AI:
 
@@ -25,22 +23,13 @@ class AI:
         else:
             self.multi_markov = markov.MultiMarkovChain(markov_order, self.player_actions)
 
-    def save_weights(self, path):
-        if not os.path.exists(path):
-            os.makedirs(path)
-
+    def get_markov_chains(self):
+        markov_dicts = []
         markov_weights = self.multi_markov.get_markov_chains()
-        for i, markov_chain in enumerate(markov_weights):
-            markov_dict = {"weights": markov_chain[0], "correct_predictions": markov_chain[1]}
-            with open(f"{path}/markov_{i + 1}.json", "w") as f:
-                json.dump(markov_dict, f, indent=4)
+        for markov_chain in markov_weights:
+            markov_dicts.append({"weights": markov_chain[0], "correct_predictions": markov_chain[1]})
 
-    def save_rvr(self, path):
-        if not os.path.exists(path):
-            os.makedirs(path)
-
-        with open(f"{path}/rvr.json", "w") as f:
-            json.dump(self.rewards, f, indent=4)
+        return markov_dicts
 
     def get_player_actions(self):
         return self.player_actions
@@ -64,10 +53,13 @@ class AI:
         # print(f"    [DEBUG] Possible offensive actions: {possible_player_actions}")
         # print(f"    [DEBUG] Possible defensive actions: {possible_ai_actions}\n")
 
-        return [a[0] for a in possible_player_actions], possible_ai_actions[0][0]
+        return [a for a in possible_player_actions], possible_ai_actions
     
     def update(self, action):
         self.multi_markov.update_matrix(action)
 
     def calculate_player_reward(self, player_action, ai_action):
         return -self.rewards[ai_action][player_action]
+    
+    def get_chain_state(self):
+        return self.multi_markov.get_chains_state()

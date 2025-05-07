@@ -1,6 +1,8 @@
 import rvr
 import json
 import os
+import datetime
+import csv
 
 class OkizemeAI:
 
@@ -23,28 +25,28 @@ class OkizemeAI:
         defense_moves = rvr_dict["defense_moves"]
         rvr_values = rvr_dict["rvr_values"]
 
-        offense_dict = {}
-        for i, offense_move in enumerate(offense_moves):
-            offense_dict[offense_move] = {}
-            for j, defense_move in enumerate(defense_moves):
-                offense_dict[offense_move][defense_move] = rvr_values[i][j]
-
         defense_dict = {}
+        for i, offense_move in enumerate(offense_moves):
+            defense_dict[offense_move] = {}
+            for j, defense_move in enumerate(defense_moves):
+                defense_dict[offense_move][defense_move] = rvr_values[i][j]
+
+        offense_dict = {}
         for i, defense_move in enumerate(defense_moves):
-            defense_dict[defense_move] = {}
+            offense_dict[defense_move] = {}
             for j, offense_move in enumerate(offense_moves):
-                defense_dict[defense_move][offense_move] = -rvr_values[j][i]
+                offense_dict[defense_move][offense_move] = -rvr_values[j][i]
 
         print("Loaded RVR values:")
         print("Offense RVR:")
-        print(offense_dict)
+        print(defense_dict)
 
         print("Defense RVR:")
-        print(defense_dict)
+        print(offense_dict)
         
         # Initialize AI with the RVR values
-        self.offense_predictor = rvr.AI(defense_dict)
-        self.defense_predictor = rvr.AI(offense_dict)
+        self.offense_predictor = rvr.AI(offense_dict)
+        self.defense_predictor = rvr.AI(defense_dict)
 
         # Load Markov chains
         offense_markov_weights = os.path.join(markov_path, "offense")
@@ -70,6 +72,11 @@ class OkizemeAI:
 
         self.curr_defender = None
 
+        self.save_results = save_results
+        if self.save_results:
+            self.offense_predictor_results = []
+            self.defense_predictor_results = []
+
     def set_defender(self, defender:int):
         if defender not in [self.AI_DEFENDING, self.PLAYER_DEFENDING]:
             raise ValueError("Defender must be either AI_DEFENDING or PLAYER_DEFENDING")
@@ -90,12 +97,24 @@ class OkizemeAI:
         if self.curr_defender == self.AI_DEFENDING:
             pred_offense, ai_defense = self.offense_predictor.predict_action()
             print(f"AI predicted possible offense actions: {pred_offense}")
-            return ai_defense
+
+            if self.save_results:
+                chains_state = self.offense_predictor.get_chain_state()
+                self.offense_predictor_results.append(
+                    {"pred_offense": pred_offense, "ai_defense": ai_defense, "chains_state": chains_state})
+
+            return ai_defense[0][0]
         
         elif self.curr_defender == self.PLAYER_DEFENDING:
             pred_defense, ai_offense = self.defense_predictor.predict_action()
             print(f"AI predicted possible defense actions: {pred_defense}")
-            return ai_offense
+
+            if self.save_results:
+                chains_state = self.defense_predictor.get_chain_state()
+                self.defense_predictor_results.append(
+                    {"pred_defense": pred_defense, "ai_offense": ai_offense, "chains_state": chains_state})
+
+            return ai_offense[0][0]
         
     def get_damage(self, offense_action, defense_action) -> tuple[float, float]:
         """
@@ -126,8 +145,15 @@ class OkizemeAI:
     def update(self, action_taken:str):
         if self.curr_defender == self.AI_DEFENDING:
             self.offense_predictor.update(action_taken)
+
+            if self.save_results:
+                self.offense_predictor_results[-1]["player_action"] = action_taken
+
         elif self.curr_defender == self.PLAYER_DEFENDING:
             self.defense_predictor.update(action_taken)
+
+            if self.save_results:
+                self.defense_predictor_results[-1]["player_action"] = action_taken
 
     def save_weights(self, path:str):
         offense_path = os.path.join(path, "offense")
@@ -138,6 +164,36 @@ class OkizemeAI:
         if not os.path.exists(defense_path):
             os.makedirs(defense_path)
 
-        self.offense_predictor.save_weights(offense_path)
-        self.defense_predictor.save_weights(defense_path)
+        markov_dicts = self.offense_predictor.get_markov_chains()
+        for i, markov_dict in enumerate(markov_dicts):
+            with open(f"{offense_path}/markov_{i + 1}.json", "w") as f:
+                json.dump(markov_dict, f, indent=4)
+
+        markov_dicts = self.defense_predictor.get_markov_chains()
+        for i, markov_dict in enumerate(markov_dicts):
+            with open(f"{defense_path}/markov_{i + 1}.json", "w") as f:
+                json.dump(markov_dict, f, indent=4)
             
+    def export_results(self, path, player_level=0, player_knowledge=0) -> None:
+        if not self.save_results:
+            return
+
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        path = os.path.join(path, f"results_{timestamp}")
+        os.makedirs(path, exist_ok=True)
+
+        self.defense_predictor_results[0]["player_level"] = player_level
+        self.defense_predictor_results[0]["player_knowledge"] = player_knowledge
+        self.offense_predictor_results[0]["player_level"] = player_level
+        self.offense_predictor_results[0]["player_knowledge"] = player_knowledge
+
+        # Save results to CSV
+        with open(os.path.join(path, "defense_results.csv"), "w", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=self.defense_predictor_results[0].keys())
+            writer.writeheader()
+            writer.writerows(self.defense_predictor_results)
+
+        with open(os.path.join(path, "offense_results.csv"), "w", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=self.offense_predictor_results[0].keys())
+            writer.writeheader()
+            writer.writerows(self.offense_predictor_results)  

@@ -109,7 +109,7 @@ class MultiMarkovChain():
         num_correct_preds = [sum(correct_preds) for correct_preds in self.correct_predictions]
         total_correct_preds = sum(num_correct_preds)
         weighted_preds = []
-        for i in range(min(self.curr_round, self.order)):
+        for i in range(len(self.correct_predictions[0])):
             weight = (num_correct_preds[i] / total_correct_preds) if total_correct_preds > 0 else 0.1
             weighted_preds.append((self.last_predictions[i], weight))
 
@@ -125,3 +125,7 @@ class MultiMarkovChain():
 
             if len(self.correct_predictions[i]) > self.order:
                 self.correct_predictions[i].pop(0)
+
+    def get_chains_state(self):
+        return [(''.join(markov_chain.curr_state) if markov_chain.curr_state is not None else "None", 
+             self.correct_predictions[i]) for i, markov_chain in enumerate(self.markov_chains)]
