@@ -13,6 +13,8 @@ class AI:
         self.player_actions = list(rvr[self.ai_actions[0]].keys())
 
     def load_multi_markov(self, markov_order=5, markov_dicts=[]) -> None:
+        self.markov_order = markov_order
+
         if len(markov_dicts) > 0:
             markov_weights = []
             correct_predictions = []
@@ -42,7 +44,7 @@ class AI:
             weight = 0.0
 
             # Weight the reward of the AI action with the probability of the possible player action
-            for player_action in possible_player_actions:
+            for player_action in possible_player_actions[:-(-self.markov_order // 2)]:
                 weight += self.rewards[ai_action][player_action[0]] * player_action[1]
             possible_ai_actions[ai_action] = weight
 
