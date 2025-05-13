@@ -55,18 +55,27 @@
 			<br />
 
 			<p class="text-lg text-gray-300">
-				Se precisar de uma explicação visual, recomendamos o shorts abaixo:
+				Se precisar de uma explicação visual, recomendamos os vídeos abaixo:
 			</p>
 
-			<!-- Vídeo -->
-			<div class="flex w-full items-center justify-center py-6">
+			<!-- Container Responsivo dos Vídeos -->
+			<div class="flex flex-col items-center justify-center gap-4 py-6 md:flex-row">
 				<iframe
-					width="360"
-					height="640"
+					class="h-[640px] w-full md:w-[360px]"
 					src="https://www.youtube.com/embed/sj1vmZZjOl4"
 					title="YouTube video player"
 					frameborder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					allowfullscreen
+				></iframe>
+
+				<iframe
+					class="h-[315px] w-full md:w-[560px]"
+					src="https://www.youtube.com/embed/7N2CIULTwCI?si=FmQAMkkkwnydpobI"
+					title="YouTube video player"
+					frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					referrerpolicy="strict-origin-when-cross-origin"
 					allowfullscreen
 				></iframe>
 			</div>
