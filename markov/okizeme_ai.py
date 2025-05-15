@@ -76,6 +76,10 @@ class OkizemeAI:
         if self.save_results:
             self.offense_predictor_results = []
             self.defense_predictor_results = []
+            
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            self.path = os.path.join("./", f"results_{timestamp}")
+            os.makedirs(path, exist_ok=True)
 
     def set_defender(self, defender:int):
         if defender not in [self.AI_DEFENDING, self.PLAYER_DEFENDING]:
@@ -174,13 +178,10 @@ class OkizemeAI:
             with open(f"{defense_path}/markov_{i + 1}.json", "w") as f:
                 json.dump(markov_dict, f, indent=4)
             
-    def export_results(self, path, player_level=0, player_knowledge=0) -> None:
+    def export_results(self, player_level=0, player_knowledge=0) -> None:
         if not self.save_results:
             return
 
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        path = os.path.join(path, f"results_{timestamp}")
-        os.makedirs(path, exist_ok=True)
 
         self.defense_predictor_results[0]["player_level"] = player_level
         self.defense_predictor_results[0]["player_knowledge"] = player_knowledge
@@ -188,12 +189,12 @@ class OkizemeAI:
         self.offense_predictor_results[0]["player_knowledge"] = player_knowledge
 
         # Save results to CSV
-        with open(os.path.join(path, "defense_results.csv"), "w", newline="") as f:
+        with open(os.path.join(self.path, "defense_results.csv"), "w", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=self.defense_predictor_results[0].keys())
             writer.writeheader()
             writer.writerows(self.defense_predictor_results)
 
-        with open(os.path.join(path, "offense_results.csv"), "w", newline="") as f:
+        with open(os.path.join(self.path, "offense_results.csv"), "w", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=self.offense_predictor_results[0].keys())
             writer.writeheader()
             writer.writerows(self.offense_predictor_results)  
