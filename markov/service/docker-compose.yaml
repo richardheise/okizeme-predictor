@@ -1,0 +1,14 @@
+services:
+  flask_app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "3333:3333"
+    volumes:
+      - ./app:/app
+    environment:
+      - FLASK_ENV=production
+
+
+

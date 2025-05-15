@@ -1,0 +1,24 @@
+# Usar a imagem oficial do Python como base
+FROM python:3.13-slim
+
+# Define a variável de ambiente para desabilitar a criação de arquivos .pyc
+ENV PYTHONDONTWRITEBYTECODE 1
+# Define a variável de ambiente para não armazenar em cache as instalações do Python
+ENV PYTHONUNBUFFERED 1
+
+# Define o diretório de trabalho no contêiner
+WORKDIR /app
+
+# Instala as dependências do sistema
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copia os arquivos de código para o contêiner
+COPY . .
+
+# Instala as dependências do Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Comando para iniciar o servidor WSGI (substitua "app:app" pelo nome do módulo e da instância da aplicação Flask)
+CMD ["gunicorn", "--bind", "0.0.0.0:3333", "service:app"]
