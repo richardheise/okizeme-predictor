@@ -10,7 +10,7 @@ class OkizemeAI:
     PLAYER_DEFENDING = 1
 
     def __init__(self, rvr_path:str, markov_order=5, 
-                 markov_path="", save_results=True) -> None:
+                 markov_path="", save_results=True, results_path="./") -> None:
         
         if not os.path.exists(rvr_path):
             raise ValueError(f"RVR path {rvr_path} does not exist") 
@@ -24,6 +24,9 @@ class OkizemeAI:
         offense_moves = rvr_dict["offense_moves"]
         defense_moves = rvr_dict["defense_moves"]
         rvr_values = rvr_dict["rvr_values"]
+
+        self.offensive_actions = offense_moves
+        self.defensive_actions = defense_moves
 
         defense_dict = {}
         for i, offense_move in enumerate(offense_moves):
@@ -78,8 +81,8 @@ class OkizemeAI:
             self.defense_predictor_results = []
             
             timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-            self.path = os.path.join("./", f"results_{timestamp}")
-            os.makedirs(path, exist_ok=True)
+            self.path = os.path.join(results_path, f"results_{timestamp}")
+            os.makedirs(self.path, exist_ok=True)
 
     def set_defender(self, defender:int):
         if defender not in [self.AI_DEFENDING, self.PLAYER_DEFENDING]:
@@ -87,11 +90,13 @@ class OkizemeAI:
         
         self.curr_defender = defender
 
-    def change_sides(self):
-        if self.curr_defender is None:
-            raise ValueError("Initial defender must be set before changing sides")
-        
-        self.curr_defender = abs(self.curr_defender - 1)
+    def predict_offense(self):
+        self.set_defender(self.PLAYER_DEFENDING)
+        return self.predict()
+    
+    def predict_defense(self):
+        self.set_defender(self.AI_DEFENDING)
+        return self.predict()
 
     def predict(self):
 
@@ -107,7 +112,7 @@ class OkizemeAI:
                 self.offense_predictor_results.append(
                     {"pred_offense": pred_offense, "ai_defense": ai_defense, "chains_state": chains_state})
 
-            return ai_defense[0][0]
+            return self.defensive_actions.index(ai_defense[0][0])
         
         elif self.curr_defender == self.PLAYER_DEFENDING:
             pred_defense, ai_offense = self.defense_predictor.predict_action()
@@ -118,7 +123,7 @@ class OkizemeAI:
                 self.defense_predictor_results.append(
                     {"pred_defense": pred_defense, "ai_offense": ai_offense, "chains_state": chains_state})
 
-            return ai_offense[0][0]
+            return self.offensive_actions.index(ai_offense[0][0])
         
     def get_damage(self, offense_action, defense_action) -> tuple[float, float]:
         """
@@ -126,10 +131,12 @@ class OkizemeAI:
             Tuple[AI damage, Player damage]
         """
 
+        offense_action_str = self.offensive_actions[offense_action]
+        defense_action_str = self.defensive_actions[defense_action]
         if self.curr_defender == self.AI_DEFENDING:
-            player_reward = self.offense_predictor.calculate_player_reward(offense_action, defense_action)
+            player_reward = self.offense_predictor.calculate_player_reward(offense_action_str, defense_action_str)
         elif self.curr_defender == self.PLAYER_DEFENDING:
-            player_reward = self.defense_predictor.calculate_player_reward(defense_action, offense_action)
+            player_reward = self.defense_predictor.calculate_player_reward(defense_action_str, offense_action_str)
         else:
             raise ValueError("Defender must be set before calculating damage")
         
@@ -146,18 +153,22 @@ class OkizemeAI:
         else:
             raise ValueError("Defender must be set before getting player actions")
 
-    def update(self, action_taken:str):
+    def update(self, action_taken:int):
         if self.curr_defender == self.AI_DEFENDING:
-            self.offense_predictor.update(action_taken)
+            action_taken_str = self.offensive_actions[action_taken]
+
+            self.offense_predictor.update(action_taken_str)
 
             if self.save_results:
-                self.offense_predictor_results[-1]["player_action"] = action_taken
+                self.offense_predictor_results[-1]["player_action"] = action_taken_str
 
         elif self.curr_defender == self.PLAYER_DEFENDING:
-            self.defense_predictor.update(action_taken)
+            action_taken_str = self.defensive_actions[action_taken]
+
+            self.defense_predictor.update(action_taken_str)
 
             if self.save_results:
-                self.defense_predictor_results[-1]["player_action"] = action_taken
+                self.defense_predictor_results[-1]["player_action"] = action_taken_str
 
     def save_weights(self, path:str):
         offense_path = os.path.join(path, "offense")
