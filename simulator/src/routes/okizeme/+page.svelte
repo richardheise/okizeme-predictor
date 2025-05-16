@@ -84,98 +84,121 @@
 		window.open(url, '_blank');
 	}
 
-	function play(playerChoice, defense) {
+	async function play(playerChoice, defense) {
 		// Reset animações
 		shakePlayer = false;
 		shakeOpponent = false;
 		pulseVictory = false;
 		playerHit = false;
 		opponentHit = false;
-		screenShake = false; // Reset screen shake
+		screenShake = false;
 		playerSprite = 'default';
 		opponentSprite = 'default';
 
-		let opponentChoice;
-		let damage;
+		const API_URL = 'https://api.okizeme.c3sl.ufpr.br';
 
-		if (defense) {
-			opponentChoice = Math.floor(Math.random() * offensiveOptions.length);
-			damage = parseFloat(table[opponentChoice][playerChoice].toFixed(1));
+		try {
+			let response, data;
+			let opponentChoice;
+			let damage;
 
-			lastChoices.player = defensiveOptions[playerChoice];
-			lastChoices.opponent = offensiveOptions[opponentChoice];
+			if (defense) {
+				// Jogador está se defendendo → oponente ataca → pegar ação ofensiva
+				response = await fetch(`${API_URL}/offense`);
+				data = await response.json();
+				opponentChoice = data.action;
 
-			if (damage > 0) {
-				playerHP = parseFloat((playerHP - damage).toFixed(1));
-				resultMsg = `Você foi acertado! Sofreu ${damage} de dano.`;
-				lastChoices.outcome = 'O oponente venceu a interação.';
-				shakePlayer = true;
-				screenShake = true; // Ativa screen shake quando toma dano
-				playerHit = true;
-				playerSprite = 'hurt';
-				isDefending = true;
-			} else if (damage < 0) {
-				opponentHP = parseFloat((opponentHP + damage).toFixed(1));
-				resultMsg = `Você venceu a interação! Causou ${-damage} de dano.`;
-				lastChoices.outcome = 'Você venceu a interação.';
-				shakeOpponent = true;
-				opponentHit = true;
-				opponentSprite = 'hurt';
-				isDefending = false;
-				playerSprite = 'attack';
-				resultMsg += ' Você ganhou a vantagem e agora ataca!';
-			} else {
-				resultMsg = 'Empate! Nenhum dano causado.';
-				lastChoices.outcome = 'Empate na troca.';
-				isDefending = Math.floor(Math.random() * 2) === 0;
-				if (!isDefending) {
-					playerSprite = 'ready';
+				damage = parseFloat(table[opponentChoice][playerChoice].toFixed(1));
+
+				lastChoices.player = defensiveOptions[playerChoice];
+				lastChoices.opponent = offensiveOptions[opponentChoice];
+
+				if (damage > 0) {
+					playerHP = parseFloat((playerHP - damage).toFixed(1));
+					resultMsg = `Você foi acertado! Sofreu ${damage} de dano.`;
+					lastChoices.outcome = 'O oponente venceu a interação.';
+					shakePlayer = true;
+					screenShake = true;
+					playerHit = true;
+					playerSprite = 'hurt';
+					isDefending = true;
+				} else if (damage < 0) {
+					opponentHP = parseFloat((opponentHP + damage).toFixed(1));
+					resultMsg = `Você venceu a interação! Causou ${-damage} de dano.`;
+					lastChoices.outcome = 'Você venceu a interação.';
+					shakeOpponent = true;
+					opponentHit = true;
+					opponentSprite = 'hurt';
+					isDefending = false;
+					playerSprite = 'attack';
 					resultMsg += ' Você ganhou a vantagem e agora ataca!';
 				} else {
-					resultMsg += ' O oponente mantém a vantagem.';
+					resultMsg = 'Empate! Nenhum dano causado.';
+					lastChoices.outcome = 'Empate na troca.';
+					isDefending = Math.floor(Math.random() * 2) === 0;
+					if (!isDefending) {
+						playerSprite = 'ready';
+						resultMsg += ' Você ganhou a vantagem e agora ataca!';
+					} else {
+						resultMsg += ' O oponente mantém a vantagem.';
+					}
 				}
-			}
-		} else {
-			opponentChoice = Math.floor(Math.random() * defensiveOptions.length);
-			damage = parseFloat(table[playerChoice][opponentChoice].toFixed(1));
-
-			lastChoices.player = offensiveOptions[playerChoice];
-			lastChoices.opponent = defensiveOptions[opponentChoice];
-
-			if (damage > 0) {
-				opponentHP = parseFloat((opponentHP - damage).toFixed(1));
-				resultMsg = `Você acertou! Causou ${damage} de dano.`;
-				lastChoices.outcome = 'Você venceu a interação.';
-				shakeOpponent = true;
-				opponentHit = true;
-				opponentSprite = 'hurt';
-				playerSprite = 'attack';
-				isDefending = false;
-			} else if (damage < 0) {
-				playerHP = parseFloat((playerHP + damage).toFixed(1));
-				resultMsg = `Você perdeu a interação! Sofreu ${-damage} de dano.`;
-				lastChoices.outcome = 'O oponente venceu a interação.';
-				shakePlayer = true;
-				screenShake = true; // Ativa screen shake quando toma dano
-				playerHit = true;
-				playerSprite = 'hurt';
-				opponentSprite = 'attack';
-				isDefending = true;
 			} else {
-				resultMsg = 'Empate! Nenhum dano causado.';
-				lastChoices.outcome = 'Empate na troca.';
-				isDefending = Math.floor(Math.random() * 2) === 0;
-				if (isDefending) {
-					opponentSprite = 'ready';
-					resultMsg += ' O oponente ganhou a vantagem e agora ataca!';
+				// Jogador está atacando → oponente defende → pegar ação defensiva
+				response = await fetch(`${API_URL}/defense`);
+				data = await response.json();
+				opponentChoice = data.action;
+
+				damage = parseFloat(table[playerChoice][opponentChoice].toFixed(1));
+
+				lastChoices.player = offensiveOptions[playerChoice];
+				lastChoices.opponent = defensiveOptions[opponentChoice];
+
+				if (damage > 0) {
+					opponentHP = parseFloat((opponentHP - damage).toFixed(1));
+					resultMsg = `Você acertou! Causou ${damage} de dano.`;
+					lastChoices.outcome = 'Você venceu a interação.';
+					shakeOpponent = true;
+					opponentHit = true;
+					opponentSprite = 'hurt';
+					playerSprite = 'attack';
+					isDefending = false;
+				} else if (damage < 0) {
+					playerHP = parseFloat((playerHP + damage).toFixed(1));
+					resultMsg = `Você perdeu a interação! Sofreu ${-damage} de dano.`;
+					lastChoices.outcome = 'O oponente venceu a interação.';
+					shakePlayer = true;
+					screenShake = true;
+					playerHit = true;
+					playerSprite = 'hurt';
+					opponentSprite = 'attack';
+					isDefending = true;
 				} else {
-					playerSprite = 'ready';
-					resultMsg += ' Você mantém a vantagem.';
+					resultMsg = 'Empate! Nenhum dano causado.';
+					lastChoices.outcome = 'Empate na troca.';
+					isDefending = Math.floor(Math.random() * 2) === 0;
+					if (isDefending) {
+						opponentSprite = 'ready';
+						resultMsg += ' O oponente ganhou a vantagem e agora ataca!';
+					} else {
+						playerSprite = 'ready';
+						resultMsg += ' Você mantém a vantagem.';
+					}
 				}
 			}
-		}
 
-		checkRound();
+			// Enviar ação do jogador para o backend
+			await fetch(`${API_URL}/update`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ action: playerChoice })
+			});
+
+			checkRound();
+		} catch (error) {
+			console.error('Erro na comunicação com o servidor:', error);
+			resultMsg = 'Erro ao tentar se comunicar com o servidor.';
+		}
 	}
 
 	function checkRound() {
