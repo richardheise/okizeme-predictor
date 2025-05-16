@@ -6,8 +6,8 @@ import csv
 
 class OkizemeAI:
 
-    AI_DEFENDING = 0
-    PLAYER_DEFENDING = 1
+    AI_DEFENDING = 1
+    PLAYER_DEFENDING = 0
 
     def __init__(self, rvr_path:str="./weights/rvr.json", markov_order=5, 
                  markov_path="", save_results=True, results_path="./results") -> None:
