@@ -1,24 +1,20 @@
 <script>
 	import { onMount } from 'svelte';
+	const API_URL = 'http://okizeme.c3sl.ufpr.br';
 
-	let experiencia = '';
 	let nivelLuta = '';
 	let nivelEstocastico = '';
 
-	// Verifica se já há dados salvos no localStorage
+	// Verifica se já há dados salvos no sessionStorage
 	onMount(() => {
-		const dadosSalvos = localStorage.getItem('dadosUsuario');
+		const dadosSalvos = sessionStorage.getItem('dadosUsuario');
 		if (dadosSalvos) {
 			window.location.href = '/okizeme';
 		}
 	});
 
 	// Função para salvar dados, com validação
-	function salvarDados() {
-		if (!experiencia) {
-			alert('Por favor, responda se já jogou jogos de luta antes.');
-			return;
-		}
+	async function salvarDados() {
 		if (!nivelLuta) {
 			alert('Por favor, selecione seu nível de conhecimento em jogos de luta.');
 			return;
@@ -29,13 +25,23 @@
 		}
 
 		const dadosUsuario = {
-			experiencia,
 			nivelLuta: parseInt(nivelLuta),
-			nivelEstocastico: parseInt(nivelEstocastico),
-			jogadas: []
+			nivelEstocastico: parseInt(nivelEstocastico)
 		};
 
-		localStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario));
+		sessionStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario));
+
+		try {
+			// Enviar nível do jogador para o backend
+			await fetch(`${API_URL}/enrollment`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ data: dadosUsuario })
+			});
+		} catch (e) {
+			console.error('Erro ao enviar inscrição.');
+		}
+
 		window.location.href = '/okizeme';
 	}
 </script>
@@ -65,22 +71,7 @@
 
 			<form class="space-y-6 text-left text-white">
 				<div>
-					<label class="mb-2 block text-center text-xl font-semibold"
-						>Você já jogou jogos de luta antes?*</label
-					>
-					<select
-						bind:value={experiencia}
-						class="bg-opacity-70 w-full rounded-lg border border-gray-500 bg-black p-3 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none"
-						required
-					>
-						<option value="">Selecione...</option>
-						<option value="sim">Sim</option>
-						<option value="não">Não</option>
-					</select>
-				</div>
-
-				<div>
-					<label class="mb-2 block text-center text-xl font-semibold">
+					<label for="Jogos" class="mb-2 block text-center text-xl font-semibold">
 						Qual seu nível de conhecimento em jogos de luta?*
 					</label>
 					<select
@@ -99,7 +90,7 @@
 				<br />
 
 				<div>
-					<label class="mb-2 block text-center text-xl font-semibold">
+					<label for="Conhecimento" class="mb-2 block text-center text-xl font-semibold">
 						Qual seu nível de conhecimento sobre modelos estocásticos?*
 					</label>
 					<select

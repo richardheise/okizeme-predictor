@@ -38,24 +38,26 @@ class AI:
 
     def predict_action(self):
         possible_player_actions = self.multi_markov.predict()
-        
+       
+
+        sorted_player_actions = sorted(possible_player_actions, key=lambda x: x[1], reverse=True)
         possible_ai_actions = {}
         for ai_action in self.ai_actions:
             weight = 0.0
 
             # Weight the reward of the AI action with the probability of the possible player action
-            for player_action in possible_player_actions[:-(-self.markov_order // 2)]:
+            for player_action in sorted_player_actions[:-(-self.markov_order // 2)]:
                 weight += self.rewards[ai_action][player_action[0]] * player_action[1]
             possible_ai_actions[ai_action] = weight
 
         # Sort the AI actions according to their reward
-        possible_ai_actions = sorted(possible_ai_actions.items(), key=lambda action: action[1], reverse=True)
+        # possible_ai_actions = sorted(possible_ai_actions.items(), key=lambda action: action[1], reverse=True)
 
         # print(f"\n    [DEBUG] Finished prediction")
         # print(f"    [DEBUG] Possible offensive actions: {possible_player_actions}")
         # print(f"    [DEBUG] Possible defensive actions: {possible_ai_actions}\n")
 
-        return [a for a in possible_player_actions], possible_ai_actions
+        return possible_player_actions, possible_ai_actions.items()
     
     def update(self, action):
         self.multi_markov.update_matrix(action)

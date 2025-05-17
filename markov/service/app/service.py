@@ -1,13 +1,16 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, json
+from flask_cors import CORS
 import logging
-import json
 from okizeme_ai import OkizemeAI
 
 app = Flask(__name__)
 
+# Habilita CORS para todas as rotas e todas as origens (para desenvolvimento)
+CORS(app)
+
 # Configuração de logging
 logging.basicConfig(
-    filename='okizeme_service.log',
+    filename='log_okizeme.log',
     level=logging.INFO,
     format='%(asctime)s %(levelname)s: %(message)s'
 )
@@ -53,10 +56,32 @@ def update():
             return jsonify({"error": "Missing 'action' field"}), 400
 
         ai.update(action_id)
+        ai.export_results()
+
         logging.info(f"/update called -> action: {action_id}")
-        return '', 200  # Sucesso sem conteúdo
+        return '', 200
     except Exception as e:
         logging.error(f"Error in /update: {e}")
+        return jsonify({"error": "Internal server error"}), 500
+
+@app.route('/enrollment', methods=['POST'])
+def enrollment():
+    try:
+        data = request.get_json()
+        dados = data.get("data", {})
+
+        player_level = dados.get("nivelLuta")
+        player_knowledge = dados.get("nivelEstocastico")
+
+        if player_level is None or player_knowledge is None:
+            return jsonify({"error": "Missing 'nivelLuta' or 'nivelEstocastico'"}), 400
+
+        ai.init_results(player_level=player_level, player_knowledge=player_knowledge, results_path="./results")
+
+        logging.info(f"/enrollment -> nível: {player_level}, conhecimento: {player_knowledge}")
+        return '', 200
+    except Exception as e:
+        logging.error(f"Erro em /enrollment: {e}")
         return jsonify({"error": "Internal server error"}), 500
 
 if __name__ == '__main__':

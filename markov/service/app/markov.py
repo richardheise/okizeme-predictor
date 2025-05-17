@@ -114,7 +114,7 @@ class MultiMarkovChain():
             weighted_preds.append((self.last_predictions[i], weight))
 
         # Return the best (order / 2 rounded up) predictions
-        return sorted(weighted_preds, key=lambda x: x[1], reverse=True)
+        return weighted_preds
 
     def update_matrix(self, action_taken):
         for markov_chain in self.markov_chains:
@@ -127,5 +127,5 @@ class MultiMarkovChain():
                 self.correct_predictions[i].pop(0)
 
     def get_chains_state(self):
-        return [(''.join(markov_chain.curr_state) if markov_chain.curr_state is not None else "None", 
+        return [('-'.join(markov_chain.curr_state) if markov_chain.curr_state is not None else "None", 
              self.correct_predictions[i]) for i, markov_chain in enumerate(self.markov_chains)]

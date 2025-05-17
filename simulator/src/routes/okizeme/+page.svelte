@@ -1,7 +1,9 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import Tabela from '$lib/components/tabela.svelte';
+	const API_URL = 'http://okizeme.c3sl.ufpr.br';
 
+	console.log(API_URL);
 	let playerHP = 8;
 	let opponentHP = 8;
 	let roundWins = { player: 0, ai: 0 };
@@ -94,8 +96,6 @@
 		screenShake = false;
 		playerSprite = 'default';
 		opponentSprite = 'default';
-
-		const API_URL = 'https://api.okizeme.c3sl.ufpr.br';
 
 		try {
 			let response, data;

@@ -10,8 +10,10 @@ class OkizemeAI:
     PLAYER_DEFENDING = 0
 
     def __init__(self, rvr_path:str="./weights/rvr.json", markov_order=5, 
-                 markov_path="", save_results=True, results_path="./results") -> None:
-        
+                 markov_path="") -> None:
+       
+        self.save_results = True
+
         if not os.path.exists(rvr_path):
             raise ValueError(f"RVR path {rvr_path} does not exist") 
         
@@ -75,14 +77,6 @@ class OkizemeAI:
 
         self.curr_defender = None
 
-        self.save_results = save_results
-        if self.save_results:
-            self.offense_predictor_results = []
-            self.defense_predictor_results = []
-            
-            timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-            self.path = os.path.join(results_path, f"results_{timestamp}")
-            os.makedirs(self.path, exist_ok=True)
 
     def set_defender(self, defender:int):
         if defender not in [self.AI_DEFENDING, self.PLAYER_DEFENDING]:
@@ -111,7 +105,8 @@ class OkizemeAI:
                 chains_state = self.offense_predictor.get_chain_state()
                 self.offense_predictor_results.append(
                     {"pred_offense": pred_offense, "ai_defense": ai_defense, "chains_state": chains_state})
-
+            
+            ai_defense = sorted(ai_defense, key=lambda action: action[1], reverse=True)
             return self.defensive_actions.index(ai_defense[0][0])
         
         elif self.curr_defender == self.PLAYER_DEFENDING:
@@ -123,6 +118,7 @@ class OkizemeAI:
                 self.defense_predictor_results.append(
                     {"pred_defense": pred_defense, "ai_offense": ai_offense, "chains_state": chains_state})
 
+            ai_offense = sorted(ai_offense, key=lambda action: action[1], reverse=True)
             return self.offensive_actions.index(ai_offense[0][0])
         
     def get_damage(self, offense_action, defense_action) -> tuple[float, float]:
@@ -189,15 +185,22 @@ class OkizemeAI:
             with open(f"{defense_path}/markov_{i + 1}.json", "w") as f:
                 json.dump(markov_dict, f, indent=4)
             
-    def export_results(self, player_level=0, player_knowledge=0) -> None:
+    def init_results(self, player_level, player_knowledge, results_path) -> None:
         if not self.save_results:
             return
 
+        if self.save_results:
+            self.offense_predictor_results = []
+            self.defense_predictor_results = []
+            
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            self.path = os.path.join(results_path, f"results_{timestamp}_{player_level}_{player_knowledge}")
+            os.makedirs(self.path, exist_ok=True)
 
-        self.defense_predictor_results[0]["player_level"] = player_level
-        self.defense_predictor_results[0]["player_knowledge"] = player_knowledge
-        self.offense_predictor_results[0]["player_level"] = player_level
-        self.offense_predictor_results[0]["player_knowledge"] = player_knowledge
+    def export_results(self) -> None:
+
+        if len(self.defense_predictor_results) <= 0 or len(self.offense_predictor_results) <= 0:
+            return
 
         # Save results to CSV
         with open(os.path.join(self.path, "defense_results.csv"), "w", newline="") as f:
