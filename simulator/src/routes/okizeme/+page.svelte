@@ -579,7 +579,7 @@
 			</h2>
 
 			<!-- Ações -->
-			<div class="mb-8 grid h-[280px] grid-cols-2 gap-4">
+			<div class="mb-8 grid h-[360px] grid-cols-2 gap-4">
 				{#if isDefending}
 					{#each defensiveOptionsButtonText as [title, description], index}
 						<button
@@ -587,7 +587,7 @@
 							class="flex flex-col items-start justify-start rounded-xl border-2 border-blue-400 bg-blue-600/80 p-4 text-left transition hover:bg-blue-700/90 hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 active:bg-blue-800"
 						>
 							<span class="text-xl font-semibold">{title}</span>
-							<span class="text-sm opacity-80">{description}</span>
+							<span class="text-md opacity-80">{description}</span>
 						</button>
 					{/each}
 				{:else}
@@ -597,7 +597,7 @@
 							class="flex flex-col items-start justify-start rounded-xl border-2 border-red-400 bg-red-600/80 p-4 text-left transition hover:bg-red-700/90 hover:shadow-lg hover:shadow-red-500/20 active:scale-95 active:bg-red-800"
 						>
 							<span class="text-xl font-semibold">{title}</span>
-							<span class="text-sm opacity-80">{description}</span>
+							<span class="text-md opacity-80">{description}</span>
 						</button>
 					{/each}
 				{/if}

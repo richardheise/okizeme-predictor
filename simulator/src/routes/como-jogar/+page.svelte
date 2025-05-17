@@ -122,7 +122,8 @@
 						aplicado do ponto de vista do agressor, ou seja, a primeira linha pode ser lida como: agarrão
 						vence defender e causa 1 de dano; perde para guard-jump sem levar dano; vence botão e causa
 						1 de dano; perde para agarrão defensivo e não recebe dano; perde para reversals recebendo
-						1.4 de dano e vence os parries causando 1 de dano.
+						1.4 de dano e vence os parries causando 1 de dano. Todos os botões também possuem o dano
+						entre parênteses e quais ações eles vencem para facilitar a jogatina.
 					</p>
 					<br />
 					<p class="mb-4 text-center">
