@@ -9,7 +9,7 @@ class OkizemeAI:
     AI_DEFENDING = 1
     PLAYER_DEFENDING = 0
 
-    def __init__(self, rvr_path:str="./weights/rvr.json", markov_order=5, 
+    def __init__(self, rvr_path:str="./weights/rvr.json", markov_order=7, 
                  markov_path="") -> None:
        
         self.save_results = True

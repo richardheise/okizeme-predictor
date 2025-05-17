@@ -55,11 +55,21 @@
 						AÇÕES OFENSIVAS
 					</h2>
 					<ul class="space-y-3 text-center text-lg font-medium text-red-300">
-						<li class="rounded bg-[rgba(255,0,0,0.1)] p-2">1. Agarrão</li>
-						<li class="rounded bg-[rgba(255,0,0,0.1)] p-2">2. Combo com Atraso</li>
-						<li class="rounded bg-[rgba(255,0,0,0.1)] p-2">3. Meaty Alto</li>
-						<li class="rounded bg-[rgba(255,0,0,0.1)] p-2">4. Meaty Baixo</li>
-						<li class="rounded bg-[rgba(255,0,0,0.1)] p-2">5. Shimmy com Parry Baixo</li>
+						<li class="rounded bg-[rgba(255,0,0,0.1)] p-2">
+							1. Agarrão — Vence Defender, Botão e Parry (1 de dano)
+						</li>
+						<li class="rounded bg-[rgba(255,0,0,0.1)] p-2">
+							2. Combo com Atraso — Vence Guard-Jump(3.5), Parry Baixo(3.5) e Reversal(3)
+						</li>
+						<li class="rounded bg-[rgba(255,0,0,0.1)] p-2">
+							3. Meaty Alto — Vence Agarrão, Parry Baixo, botão, com 3.5 de dano
+						</li>
+						<li class="rounded bg-[rgba(255,0,0,0.1)] p-2">
+							4. Meaty Baixo — Vence Agarrão, Parry alto e botão, com 2.5 de dano
+						</li>
+						<li class="rounded bg-[rgba(255,0,0,0.1)] p-2">
+							5. Shimmy — Vence Agarrão(3) e Reversal(3.5)
+						</li>
 					</ul>
 				</div>
 
@@ -69,13 +79,27 @@
 						AÇÕES DEFENSIVAS
 					</h2>
 					<ul class="space-y-3 text-center text-lg font-semibold text-blue-300">
-						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">1. Defender</li>
-						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">2. Guard-jump</li>
-						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">3. Botão</li>
-						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">4. Agarrão</li>
-						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">5. Reversal</li>
-						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">6. Parry Alto</li>
-						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">7. Parry Baixo</li>
+						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">
+							1. Defender — Vence Combo c/ Atraso, Meaty e Shimmy
+						</li>
+						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">
+							2. Guard-jump — Vence Agarrão, Meaty e Shimmy
+						</li>
+						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">
+							3. Botão — Vence Shimmy(3), Combo com Atraso(3.5)
+						</li>
+						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">
+							4. Agarrão — Vence Combo c/ Atraso(1)
+						</li>
+						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">
+							5. Reversal — Vence Agarrão e Meaty, com 1.4 de dano
+						</li>
+						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">
+							6. Parry Alto — Vence Combo c/ Atraso e Meaty Alto, com 3.5 de dano
+						</li>
+						<li class="rounded bg-[rgba(0,0,255,0.1)] p-2">
+							7. Parry Baixo — Vence Meaty baixo (3.5)
+						</li>
 					</ul>
 				</div>
 			</div>

@@ -1,7 +1,7 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import Tabela from '$lib/components/tabela.svelte';
-	const API_URL = 'http://okizeme.c3sl.ufpr.br';
+	const API_URL = 'http://okizeme.c3sl.ufpr.br/api';
 
 	console.log(API_URL);
 	let playerHP = 8;
@@ -43,12 +43,24 @@
 		'Parry Baixo'
 	];
 
-	const offensiveOptions = [
-		'Agarrão',
-		'Combo com Atraso',
-		'Meaty Alto',
-		'Meaty Baixo',
-		'Shimmy com Parry Baixo'
+	const offensiveOptions = ['Agarrão', 'Combo com Atraso', 'Meaty Alto', 'Meaty Baixo', 'Shimmy'];
+
+	const defensiveOptionsButtonText = [
+		['Defender', 'Vence Combo c/ Atraso, Meaty e Shimmy'],
+		['Guard-jump', 'Vence Agarrão, Meaty e Shimmy'],
+		['Botão', 'Vence Shimmy(3), Combo com Atraso(3.5)'],
+		['Agarrão', 'Vence Combo c/ Atraso(1)'],
+		['Reversal', 'Vence Agarrão e Meaty, com 1.4 de dano'],
+		['Parry Alto', 'Vence Combo c/ Atraso e Meaty Alto, com 3.5 de dano'],
+		['Parry Baixo', 'Vence Meaty baixo (3.5)']
+	];
+
+	const offensiveOptionsButtonText = [
+		['Agarrão', 'Vence Defender, Botão e Parry (1 de dano)'],
+		['Combo com Atraso', 'Vence Guard-Jump(3.5), Parry Baixo(3.5) e Reversal(3)'],
+		['Meaty Alto', 'Vence Agarrão, Parry Baixo, botão, com 3.5 de dano'],
+		['Meaty Baixo', 'Vence Agarrão, Parry alto e botão, com 2.5 de dano'],
+		['Shimmy', 'Vence Agarrão(3) e Reversal(3.5)']
 	];
 
 	let lastChoices = {
@@ -569,21 +581,23 @@
 			<!-- Ações -->
 			<div class="mb-8 grid h-[280px] grid-cols-2 gap-4">
 				{#if isDefending}
-					{#each defensiveOptions as action, index}
+					{#each defensiveOptionsButtonText as [title, description], index}
 						<button
 							on:click={() => play(index, true)}
-							class="rounded-xl border-2 border-blue-400 bg-blue-600/80 p-4 text-xl transition hover:bg-blue-700/90 hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 active:bg-blue-800"
+							class="flex flex-col items-start justify-start rounded-xl border-2 border-blue-400 bg-blue-600/80 p-4 text-left transition hover:bg-blue-700/90 hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 active:bg-blue-800"
 						>
-							{action}
+							<span class="text-xl font-semibold">{title}</span>
+							<span class="text-sm opacity-80">{description}</span>
 						</button>
 					{/each}
 				{:else}
-					{#each offensiveOptions as action, index}
+					{#each offensiveOptionsButtonText as [title, description], index}
 						<button
 							on:click={() => play(index, false)}
-							class="rounded-xl border-2 border-red-400 bg-red-600/80 p-4 text-xl transition hover:bg-red-700/90 hover:shadow-lg hover:shadow-red-500/20 active:scale-95 active:bg-red-800"
+							class="flex flex-col items-start justify-start rounded-xl border-2 border-red-400 bg-red-600/80 p-4 text-left transition hover:bg-red-700/90 hover:shadow-lg hover:shadow-red-500/20 active:scale-95 active:bg-red-800"
 						>
-							{action}
+							<span class="text-xl font-semibold">{title}</span>
+							<span class="text-sm opacity-80">{description}</span>
 						</button>
 					{/each}
 				{/if}

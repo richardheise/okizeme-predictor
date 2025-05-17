@@ -1,12 +1,8 @@
 from flask import Flask, jsonify, request, json
-from flask_cors import CORS
 import logging
 from okizeme_ai import OkizemeAI
 
 app = Flask(__name__)
-
-# Habilita CORS para todas as rotas e todas as origens (para desenvolvimento)
-CORS(app)
 
 # Configuração de logging
 logging.basicConfig(
@@ -86,4 +82,3 @@ def enrollment():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3333)
-
