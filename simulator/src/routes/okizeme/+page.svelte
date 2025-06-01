@@ -1,7 +1,7 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import Tabela from '$lib/components/tabela.svelte';
-	const API_URL = 'http://okizeme.c3sl.ufpr.br/api';
+	const API_URL = 'http://localhost:3333/';
 
 	console.log(API_URL);
 	let playerHP = 8;
@@ -16,7 +16,7 @@
 	let shakePlayer = false;
 	let shakeOpponent = false;
 	let pulseVictory = false;
-	let screenShake = false; // Nova variável para tremer a tela
+	let screenShake = false;
 	const maxHP = 8;
 
 	// Variáveis para personagens
@@ -199,41 +199,63 @@
 				}
 			}
 
-			// Enviar ação do jogador para o backend
-			await fetch(`${API_URL}/update`, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ action: playerChoice })
-			});
-
-			checkRound();
+			checkRound(playerChoice);
 		} catch (error) {
 			console.error('Erro na comunicação com o servidor:', error);
 			resultMsg = 'Erro ao tentar se comunicar com o servidor.';
 		}
 	}
 
-	function checkRound() {
+	async function checkRound(playerChoice) {
+		let winner = null;
+		let roundEnded = false;
+
 		if (playerHP <= 0) {
 			roundWins.ai++;
+			winner = 'ai';
 			isDefending = true;
 			resultMsg = 'Novo round! Fight!';
 			resetRound();
+			roundEnded = true;
 		} else if (opponentHP <= 0) {
 			roundWins.player++;
+			winner = 'player';
 			resultMsg = 'Novo round! Fight!';
 			resetRound();
+			roundEnded = true;
 		}
 
-		if (roundWins.player === 2) {
-			matchWins.player++;
-			resultMsg = `Você venceu a partida! O placar é: ${matchWins.player}:${matchWins.ai}`;
-			resetMatch();
-		} else if (roundWins.ai === 2) {
-			matchWins.ai++;
-			resultMsg = `Você perdeu a partida! O placar é: ${matchWins.player}:${matchWins.ai}`;
-			isDefending = false;
-			resetMatch();
+		const roundNumber = roundWins.player + roundWins.ai;
+
+		try {
+			await fetch(`${API_URL}/update`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					event: 'round_update',
+					action: playerChoice,
+					round: roundNumber,
+					winner: winner, // será null se o round não terminou
+					roundWins: { ...roundWins },
+					matchWins: { ...matchWins }
+				})
+			});
+		} catch (error) {
+			console.error('Erro ao enviar dados de update:', error);
+		}
+
+		// Checar se alguém venceu a partida
+		if (roundEnded) {
+			if (roundWins.player === 2) {
+				matchWins.player++;
+				resultMsg = `Você venceu a partida! O placar é: ${matchWins.player}:${matchWins.ai}`;
+				resetMatch();
+			} else if (roundWins.ai === 2) {
+				matchWins.ai++;
+				resultMsg = `Você perdeu a partida! O placar é: ${matchWins.player}:${matchWins.ai}`;
+				isDefending = false;
+				resetMatch();
+			}
 		}
 	}
 
@@ -259,7 +281,7 @@
 	<div class="bg flex min-h-screen items-center justify-center p-4">
 		<!-- Placar de partidas no topo -->
 		<div
-			class="absolute -top-0 left-1/2 w-[390px] -translate-x-1/2 transform rounded-lg bg-gray-800 px-6 py-3 text-2xl font-bold text-yellow-100 shadow-lg"
+			class="absolute -top-0 left-1/2 w-[410px] -translate-x-1/2 transform rounded-lg bg-gray-800 px-6 py-3 text-2xl font-bold text-yellow-100 shadow-lg"
 		>
 			Partidas: Você {matchWins.player} × {matchWins.ai} Oponente
 		</div>
@@ -270,7 +292,7 @@
 				: ''}"
 		>
 			<!-- Botão Tabela e Música -->
-			<div class="absolute top-4 right-4 flex gap-2">
+			<div class="absolute right-4 top-4 flex gap-2">
 				<button
 					class="flex items-center gap-2 rounded-lg bg-gray-700 px-4 py-2 text-white transition hover:bg-gray-600"
 					on:click={() => (showTableModal = true)}
@@ -453,7 +475,7 @@
 
 				<!-- VS -->
 				<div class="mx-4 flex flex-col items-center p-4">
-					<div class="mt-2 w-[190px] pb-2 text-3xl font-semibold">
+					<div class="mt-2 w-[210px] pb-2 text-3xl font-semibold">
 						Rounds: {roundWins.player} × {roundWins.ai}
 					</div>
 					<div class="text-4xl font-bold text-red-500">VS</div>
@@ -644,7 +666,7 @@
 				>
 					<button
 						on:click={() => (showTableModal = false)}
-						class="absolute top-4 right-4 rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600"
+						class="absolute right-4 top-4 rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -676,9 +698,9 @@
 
 	/* Cardbox central com tamanho fixo */
 	.game-card {
-		min-height: 80vh;
+		min-height: 90vh;
 		min-width: 90vw;
-		max-height: 80vh;
+		max-height: 90vh;
 		overflow-y: auto;
 	}
 

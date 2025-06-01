@@ -1,8 +1,11 @@
 from flask import Flask, jsonify, request, json
 import logging
 from okizeme_ai import OkizemeAI
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+CORS(app)
 
 # Configuração de logging
 logging.basicConfig(
@@ -52,9 +55,28 @@ def update():
             return jsonify({"error": "Missing 'action' field"}), 400
 
         ai.update(action_id)
-        ai.export_results()
 
-        logging.info(f"/update called -> action: {action_id}")
+        # Se houver vencedor do round, exporta com round_result
+        winner = data.get("winner")
+        round_num = data.get("round")
+        round_wins = data.get("roundWins", {})
+        match_wins = data.get("matchWins", {})
+
+        if winner is not None and round_num is not None:
+            round_result = {
+                "match": match_wins.get("player", 0) + match_wins.get("ai", 0) + 1,  # partida atual
+                "round": round_num,
+                "winner": winner,
+                "player_round_wins": round_wins.get("player", 0),
+                "ai_round_wins": round_wins.get("ai", 0),
+                "player_match_wins": match_wins.get("player", 0),
+                "ai_match_wins": match_wins.get("ai", 0)
+            }
+            ai.export_results(round_result=round_result)
+        else:
+            ai.export_results()
+
+        logging.info(f"/update called -> action: {action_id}, winner: {winner}")
         return '', 200
     except Exception as e:
         logging.error(f"Error in /update: {e}")

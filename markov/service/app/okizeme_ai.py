@@ -197,18 +197,36 @@ class OkizemeAI:
             self.path = os.path.join(results_path, f"results_{timestamp}_{player_level}_{player_knowledge}")
             os.makedirs(self.path, exist_ok=True)
 
-    def export_results(self) -> None:
+    def export_results(self, round_result: dict = None) -> None:
+        if len(self.defense_predictor_results) > 0:
+            defense_file = os.path.join(self.path, "defense_results.csv")
+            self._export_to_csv(defense_file, self.defense_predictor_results)
 
-        if len(self.defense_predictor_results) <= 0 or len(self.offense_predictor_results) <= 0:
-            return
+        if len(self.offense_predictor_results) > 0:
+            offense_file = os.path.join(self.path, "offense_results.csv")
+            self._export_to_csv(offense_file, self.offense_predictor_results)
 
-        # Save results to CSV
-        with open(os.path.join(self.path, "defense_results.csv"), "w", newline="") as f:
-            writer = csv.DictWriter(f, fieldnames=self.defense_predictor_results[0].keys())
-            writer.writeheader()
-            writer.writerows(self.defense_predictor_results)
+        # Se resultado de round foi fornecido, salva também
+        if round_result:
+            round_file = os.path.join(self.path, "round_results.csv")
+            file_exists = os.path.isfile(round_file)
+            with open(round_file, "a", newline="") as f:
+                fieldnames = [
+                    "match",
+                    "round",
+                    "winner",
+                    "player_round_wins", "ai_round_wins",
+                    "player_match_wins", "ai_match_wins"
+                ]
+                writer = csv.DictWriter(f, fieldnames=fieldnames)
+                if not file_exists:
+                    writer.writeheader()
+                writer.writerow(round_result)
 
-        with open(os.path.join(self.path, "offense_results.csv"), "w", newline="") as f:
-            writer = csv.DictWriter(f, fieldnames=self.offense_predictor_results[0].keys())
-            writer.writeheader()
-            writer.writerows(self.offense_predictor_results)  
+    def _export_to_csv(self, file_path, data):
+        file_exists = os.path.isfile(file_path)
+        with open(file_path, "a", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=data[0].keys())
+            if not file_exists:
+                writer.writeheader()
+            writer.writerows(data)

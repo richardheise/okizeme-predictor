@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	const API_URL = 'https://okizeme.c3sl.ufpr.br/api';
+	const API_URL = 'http://localhost:3333/';
 
 	let nivelLuta = '';
 	let nivelEstocastico = '';

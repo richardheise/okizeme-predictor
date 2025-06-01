@@ -15,7 +15,7 @@
 	<!-- Conteúdo centralizado -->
 	<div class="flex h-full flex-col items-center justify-center px-4 text-center">
 		<div
-			class="bg-opacity-90 h-full w-full overflow-auto border-0 bg-black p-6 text-white shadow-none md:h-[60%] md:w-[90%] md:max-w-5xl md:rounded-2xl md:border-4 md:border-red-600 md:bg-[rgba(0,0,0,0.8)] md:p-10 md:shadow-2xl md:backdrop-blur-md"
+			class="bg-opacity-90 h-full w-full overflow-auto border-0 bg-black p-6 text-white shadow-none md:h-[60%] md:w-[90%] md:max-w-7xl md:rounded-2xl md:border-4 md:border-red-600 md:bg-[rgba(0,0,0,0.8)] md:p-10 md:shadow-2xl md:backdrop-blur-md"
 		>
 			<h1
 				class="mb-10 text-3xl font-bold text-yellow-300 md:mb-12 md:text-5xl"
