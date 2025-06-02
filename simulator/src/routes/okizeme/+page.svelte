@@ -3,7 +3,6 @@
 	import Tabela from '$lib/components/tabela.svelte';
 	const API_URL = 'http://localhost:3333/';
 
-	console.log(API_URL);
 	let playerHP = 8;
 	let opponentHP = 8;
 	let roundWins = { player: 0, ai: 0 };
@@ -292,7 +291,7 @@
 				: ''}"
 		>
 			<!-- Botão Tabela e Música -->
-			<div class="absolute right-4 top-4 flex gap-2">
+			<div class="absolute top-4 right-4 flex gap-2">
 				<button
 					class="flex items-center gap-2 rounded-lg bg-gray-700 px-4 py-2 text-white transition hover:bg-gray-600"
 					on:click={() => (showTableModal = true)}
@@ -666,7 +665,7 @@
 				>
 					<button
 						on:click={() => (showTableModal = false)}
-						class="absolute right-4 top-4 rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600"
+						class="absolute top-4 right-4 rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"

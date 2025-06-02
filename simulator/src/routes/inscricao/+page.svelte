@@ -5,14 +5,6 @@
 	let nivelLuta = '';
 	let nivelEstocastico = '';
 
-	// Verifica se já há dados salvos no sessionStorage
-	onMount(() => {
-		const dadosSalvos = sessionStorage.getItem('dadosUsuario');
-		if (dadosSalvos) {
-			window.location.href = '/okizeme';
-		}
-	});
-
 	// Função para salvar dados, com validação
 	async function salvarDados() {
 		if (!nivelLuta) {
@@ -29,8 +21,6 @@
 			nivelEstocastico: parseInt(nivelEstocastico)
 		};
 
-		sessionStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario));
-
 		try {
 			// Enviar nível do jogador para o backend
 			await fetch(`${API_URL}/enrollment`, {
@@ -41,8 +31,6 @@
 		} catch (e) {
 			console.error('Erro ao enviar inscrição.');
 		}
-
-		window.location.href = '/okizeme';
 	}
 </script>
 
