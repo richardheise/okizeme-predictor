@@ -14,7 +14,7 @@ You’ll need `pnpm`, `npm`, `python3`, and Docker installed on your system.
    pnpm i
    pnpm run build
    docker compose up --build -d
-```
+   ```
 
 The server should now be up and running.
 
