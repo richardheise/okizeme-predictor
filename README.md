@@ -32,7 +32,7 @@ This starts the backend service that handles the Markov Chain logic.
 
 Only the Markov states and match results. **Nothing more**.
 
-[→ Terms of Use](./TERMS.md)
+[→ Terms of Use](./TERMOS.md)
 
 ### Why Does This Exist?
 
