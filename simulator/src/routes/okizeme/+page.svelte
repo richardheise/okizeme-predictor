@@ -399,13 +399,13 @@
 							/>
 						{:else if playerSprite === 'ready'}
 							<img
-								src="http://ensabahnur.free.fr/BastonNew/ImagesCharacters/ken-stance.gif"
+								src="https://wiki.supercombo.gg/images/8/8d/%28kent%29.gif"
 								alt="Player Ready"
 								class="slow-gif h-full w-full object-contain brightness-125 contrast-125"
 							/>
 						{:else}
 							<img
-								src="http://ensabahnur.free.fr/BastonNew/ImagesCharacters/ken-stance.gif"
+								src="https://wiki.supercombo.gg/images/8/8d/%28kent%29.gif"
 								alt="Player Default"
 								class="slow-gif h-full w-full object-contain"
 							/>
@@ -459,14 +459,14 @@
 							/>
 						{:else if opponentSprite === 'ready'}
 							<img
-								src="http://ensabahnur.free.fr/BastonNew/ImagesCharacters/ken-stance.gif"
+								src="https://wiki.supercombo.gg/images/8/8d/%28kent%29.gif"
 								alt="Opponent Ready"
 								class="slow-gif h-full w-full scale-x-[-1] transform object-contain brightness-125 contrast-125"
 								style="filter: hue-rotate(180deg) saturate(1.2);"
 							/>
 						{:else}
 							<img
-								src="http://ensabahnur.free.fr/BastonNew/ImagesCharacters/ken-stance.gif"
+								src="https://wiki.supercombo.gg/images/8/8d/%28kent%29.gif"
 								alt="Opponent Default"
 								class="slow-gif h-full w-full scale-x-[-1] transform object-contain"
 								style="filter: hue-rotate(180deg) saturate(1.2);"
