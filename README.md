@@ -32,6 +32,8 @@ This starts the backend service that handles the Markov Chain logic.
 
 Only the Markov states and match results. **Nothing more**.
 
+[→ Terms of Use](./TERMS.md)
+
 ### Why Does This Exist?
 
 Because we love fighting games and AI.
