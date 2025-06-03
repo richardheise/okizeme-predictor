@@ -31,6 +31,8 @@
 		} catch (e) {
 			console.error('Erro ao enviar inscrição.');
 		}
+
+		window.location.href = '/okizeme';
 	}
 </script>
 
@@ -64,7 +66,7 @@
 					</label>
 					<select
 						bind:value={nivelLuta}
-						class="bg-opacity-70 w-full rounded-lg border border-gray-500 bg-black p-3 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+						class="w-full rounded-lg border border-gray-500 bg-black bg-opacity-70 p-3 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
 						required
 					>
 						<option value="">Selecione...</option>
@@ -83,7 +85,7 @@
 					</label>
 					<select
 						bind:value={nivelEstocastico}
-						class="bg-opacity-70 w-full rounded-lg border border-gray-500 bg-black p-3 text-white focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+						class="w-full rounded-lg border border-gray-500 bg-black bg-opacity-70 p-3 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
 						required
 					>
 						<option value="">Selecione...</option>

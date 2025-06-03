@@ -10,6 +10,8 @@
 	let resultMsg = '';
 	let showTableModal = false;
 	let isDefending = false;
+	let showGameEndModal = false;
+	let gameEndMessage = '';
 
 	// Variáveis para animações
 	let shakePlayer = false;
@@ -105,8 +107,6 @@
 		playerHit = false;
 		opponentHit = false;
 		screenShake = false;
-		playerSprite = 'default';
-		opponentSprite = 'default';
 
 		try {
 			let response, data;
@@ -131,7 +131,8 @@
 					shakePlayer = true;
 					screenShake = true;
 					playerHit = true;
-					playerSprite = 'hurt';
+					playerSprite = 'defending';
+					opponentSprite = 'attack';
 					isDefending = true;
 				} else if (damage < 0) {
 					opponentHP = parseFloat((opponentHP + damage).toFixed(1));
@@ -139,19 +140,22 @@
 					lastChoices.outcome = 'Você venceu a interação.';
 					shakeOpponent = true;
 					opponentHit = true;
-					opponentSprite = 'hurt';
-					isDefending = false;
 					playerSprite = 'attack';
+					opponentSprite = 'defending';
+					isDefending = false;
 					resultMsg += ' Você ganhou a vantagem e agora ataca!';
 				} else {
 					resultMsg = 'Empate! Nenhum dano causado.';
 					lastChoices.outcome = 'Empate na troca.';
 					isDefending = Math.floor(Math.random() * 2) === 0;
 					if (!isDefending) {
-						playerSprite = 'ready';
 						resultMsg += ' Você ganhou a vantagem e agora ataca!';
+						playerSprite = 'attack';
+						opponentSprite = 'defending';
 					} else {
 						resultMsg += ' O oponente mantém a vantagem.';
+						playerSprite = 'defending';
+						opponentSprite = 'attack';
 					}
 				}
 			} else {
@@ -171,8 +175,8 @@
 					lastChoices.outcome = 'Você venceu a interação.';
 					shakeOpponent = true;
 					opponentHit = true;
-					opponentSprite = 'hurt';
 					playerSprite = 'attack';
+					opponentSprite = 'defending';
 					isDefending = false;
 				} else if (damage < 0) {
 					playerHP = parseFloat((playerHP + damage).toFixed(1));
@@ -181,7 +185,7 @@
 					shakePlayer = true;
 					screenShake = true;
 					playerHit = true;
-					playerSprite = 'hurt';
+					playerSprite = 'defending';
 					opponentSprite = 'attack';
 					isDefending = true;
 				} else {
@@ -189,11 +193,14 @@
 					lastChoices.outcome = 'Empate na troca.';
 					isDefending = Math.floor(Math.random() * 2) === 0;
 					if (isDefending) {
-						opponentSprite = 'ready';
 						resultMsg += ' O oponente ganhou a vantagem e agora ataca!';
+						playerSprite = 'defending';
+						opponentSprite = 'attack';
 					} else {
 						playerSprite = 'ready';
 						resultMsg += ' Você mantém a vantagem.';
+						playerSprite = 'attack';
+						opponentSprite = 'defending';
 					}
 				}
 			}
@@ -272,6 +279,17 @@
 		roundWins.ai = 0;
 		playerSprite = 'default';
 		opponentSprite = 'default';
+
+		// Verificar se alguém chegou a 10 vitórias
+		if (matchWins.player === 10) {
+			gameEndMessage =
+				'Você ganhou! Parabéns. Você pode fechar este modal e continuar jogando se quiser, mas já temos os dados que precisamos. Muito obrigado por jogar!';
+			showGameEndModal = true;
+		} else if (matchWins.ai === 10) {
+			gameEndMessage =
+				'Você perdeu! Que pena. Você pode fechar este modal e continuar jogando se quiser, mas já temos os dados que precisamos. Muito obrigado por jogar!';
+			showGameEndModal = true;
+		}
 	}
 </script>
 
@@ -291,7 +309,7 @@
 				: ''}"
 		>
 			<!-- Botão Tabela e Música -->
-			<div class="absolute top-4 right-4 flex gap-2">
+			<div class="absolute right-4 top-4 flex gap-2">
 				<button
 					class="flex items-center gap-2 rounded-lg bg-gray-700 px-4 py-2 text-white transition hover:bg-gray-600"
 					on:click={() => (showTableModal = true)}
@@ -367,93 +385,30 @@
 							? 'animate-hit'
 							: ''}"
 					>
-						{#if playerSprite === 'hurt'}
-							<div class="absolute inset-0 flex items-center justify-center">
-								<div class="h-24 w-24 rounded-full bg-red-500/20"></div>
-							</div>
-							<svg class="h-full w-full" viewBox="0 0 100 100">
-								<circle cx="50" cy="40" r="20" fill="#3b82f6" />
-								<circle cx="40" cy="35" r="3" fill="white" />
-								<circle cx="60" cy="35" r="3" fill="white" />
-								<path
-									d="M40,50 Q50,55 60,50"
-									stroke="white"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<rect x="35" y="65" width="30" height="15" rx="5" fill="#3b82f6" />
-								<rect x="30" y="80" width="40" height="10" rx="5" fill="#3b82f6" />
-								<rect x="25" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
-								<rect x="65" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
-							</svg>
+						{#if playerSprite === 'defending'}
+							<img
+								src="https://wiki.supercombo.gg/images/a/a4/%28kenhparry%29.gif"
+								alt="Player defending"
+								class="w-fullobject-contain slow-gif h-full"
+							/>
 						{:else if playerSprite === 'attack'}
-							<svg class="h-full w-full" viewBox="0 0 100 100">
-								<circle cx="50" cy="40" r="20" fill="#3b82f6" />
-								<circle cx="40" cy="35" r="3" fill="white" />
-								<circle cx="60" cy="35" r="3" fill="white" />
-								<path
-									d="M40,50 Q50,55 60,50"
-									stroke="white"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<rect x="45" y="65" width="20" height="15" rx="5" fill="#3b82f6" />
-								<rect x="40" y="80" width="30" height="10" rx="5" fill="#3b82f6" />
-								<rect
-									x="25"
-									y="60"
-									width="10"
-									height="40"
-									rx="5"
-									fill="#3b82f6"
-									transform="rotate(-20, 30, 80)"
-								/>
-								<rect
-									x="65"
-									y="60"
-									width="10"
-									height="40"
-									rx="5"
-									fill="#3b82f6"
-									transform="rotate(20, 70, 80)"
-								/>
-							</svg>
+							<img
+								src="https://wiki.supercombo.gg/images/a/ae/%28kencmp%29.gif"
+								alt="Player Attack"
+								class="slow-gif h-full w-full object-contain"
+							/>
 						{:else if playerSprite === 'ready'}
-							<svg class="h-full w-full" viewBox="0 0 100 100">
-								<circle cx="50" cy="40" r="20" fill="#3b82f6" />
-								<circle cx="40" cy="35" r="3" fill="white" />
-								<circle cx="60" cy="35" r="3" fill="white" />
-								<path
-									d="M40,50 Q50,55 60,50"
-									stroke="white"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<rect x="35" y="65" width="30" height="15" rx="5" fill="#3b82f6" />
-								<rect x="30" y="80" width="40" height="10" rx="5" fill="#3b82f6" />
-								<rect x="25" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
-								<rect x="65" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
-							</svg>
+							<img
+								src="http://ensabahnur.free.fr/BastonNew/ImagesCharacters/ken-stance.gif"
+								alt="Player Ready"
+								class="slow-gif h-full w-full object-contain brightness-125 contrast-125"
+							/>
 						{:else}
-							<svg class="h-full w-full" viewBox="0 0 100 100">
-								<circle cx="50" cy="40" r="20" fill="#3b82f6" />
-								<circle cx="40" cy="35" r="3" fill="white" />
-								<circle cx="60" cy="35" r="3" fill="white" />
-								<path
-									d="M40,50 Q50,55 60,50"
-									stroke="white"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<rect x="35" y="65" width="30" height="15" rx="5" fill="#3b82f6" />
-								<rect x="30" y="80" width="40" height="10" rx="5" fill="#3b82f6" />
-								<rect x="25" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
-								<rect x="65" y="60" width="10" height="30" rx="5" fill="#3b82f6" />
-							</svg>
+							<img
+								src="http://ensabahnur.free.fr/BastonNew/ImagesCharacters/ken-stance.gif"
+								alt="Player Default"
+								class="slow-gif h-full w-full object-contain"
+							/>
 						{/if}
 					</div>
 
@@ -488,93 +443,34 @@
 							? 'animate-hit'
 							: ''}"
 					>
-						{#if opponentSprite === 'hurt'}
-							<div class="absolute inset-0 flex items-center justify-center">
-								<div class="h-24 w-24 rounded-full bg-red-500/20"></div>
-							</div>
-							<svg class="h-full w-full" viewBox="0 0 100 100">
-								<circle cx="50" cy="40" r="20" fill="#ef4444" />
-								<circle cx="40" cy="35" r="3" fill="white" />
-								<circle cx="60" cy="35" r="3" fill="white" />
-								<path
-									d="M40,50 Q50,55 60,50"
-									stroke="white"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<rect x="35" y="65" width="30" height="15" rx="5" fill="#ef4444" />
-								<rect x="30" y="80" width="40" height="10" rx="5" fill="#ef4444" />
-								<rect x="25" y="60" width="10" height="30" rx="5" fill="#ef4444" />
-								<rect x="65" y="60" width="10" height="30" rx="5" fill="#ef4444" />
-							</svg>
+						{#if opponentSprite === 'defending'}
+							<img
+								src="https://wiki.supercombo.gg/images/a/a4/%28kenhparry%29.gif"
+								alt="Opponent defending"
+								class="slow-gif h-full w-full scale-x-[-1] transform object-contain"
+								style="filter: hue-rotate(180deg) saturate(1.2);"
+							/>
 						{:else if opponentSprite === 'attack'}
-							<svg class="h-full w-full" viewBox="0 0 100 100">
-								<circle cx="50" cy="40" r="20" fill="#ef4444" />
-								<circle cx="40" cy="35" r="3" fill="white" />
-								<circle cx="60" cy="35" r="3" fill="white" />
-								<path
-									d="M40,50 Q50,55 60,50"
-									stroke="white"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<rect x="45" y="65" width="20" height="15" rx="5" fill="#ef4444" />
-								<rect x="40" y="80" width="30" height="10" rx="5" fill="#ef4444" />
-								<rect
-									x="25"
-									y="60"
-									width="10"
-									height="40"
-									rx="5"
-									fill="#ef4444"
-									transform="rotate(-20, 30, 80)"
-								/>
-								<rect
-									x="65"
-									y="60"
-									width="10"
-									height="40"
-									rx="5"
-									fill="#ef4444"
-									transform="rotate(20, 70, 80)"
-								/>
-							</svg>
+							<img
+								src="https://wiki.supercombo.gg/images/a/ae/%28kencmp%29.gif"
+								alt="Opponent Attack"
+								class="slow-gif h-full w-full scale-x-[-1] transform object-contain"
+								style="filter: hue-rotate(180deg) saturate(1.2);"
+							/>
 						{:else if opponentSprite === 'ready'}
-							<svg class="h-full w-full" viewBox="0 0 100 100">
-								<circle cx="50" cy="40" r="20" fill="#ef4444" />
-								<circle cx="40" cy="35" r="3" fill="white" />
-								<circle cx="60" cy="35" r="3" fill="white" />
-								<path
-									d="M40,50 Q50,55 60,50"
-									stroke="white"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<rect x="35" y="65" width="30" height="15" rx="5" fill="#ef4444" />
-								<rect x="30" y="80" width="40" height="10" rx="5" fill="#ef4444" />
-								<rect x="25" y="60" width="10" height="30" rx="5" fill="#ef4444" />
-								<rect x="65" y="60" width="10" height="30" rx="5" fill="#ef4444" />
-							</svg>
+							<img
+								src="http://ensabahnur.free.fr/BastonNew/ImagesCharacters/ken-stance.gif"
+								alt="Opponent Ready"
+								class="slow-gif h-full w-full scale-x-[-1] transform object-contain brightness-125 contrast-125"
+								style="filter: hue-rotate(180deg) saturate(1.2);"
+							/>
 						{:else}
-							<svg class="h-full w-full" viewBox="0 0 100 100">
-								<circle cx="50" cy="40" r="20" fill="#ef4444" />
-								<circle cx="40" cy="35" r="3" fill="white" />
-								<circle cx="60" cy="35" r="3" fill="white" />
-								<path
-									d="M40,50 Q50,55 60,50"
-									stroke="white"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<rect x="35" y="65" width="30" height="15" rx="5" fill="#ef4444" />
-								<rect x="30" y="80" width="40" height="10" rx="5" fill="#ef4444" />
-								<rect x="25" y="60" width="10" height="30" rx="5" fill="#ef4444" />
-								<rect x="65" y="60" width="10" height="30" rx="5" fill="#ef4444" />
-							</svg>
+							<img
+								src="http://ensabahnur.free.fr/BastonNew/ImagesCharacters/ken-stance.gif"
+								alt="Opponent Default"
+								class="slow-gif h-full w-full scale-x-[-1] transform object-contain"
+								style="filter: hue-rotate(180deg) saturate(1.2);"
+							/>
 						{/if}
 					</div>
 
@@ -665,7 +561,7 @@
 				>
 					<button
 						on:click={() => (showTableModal = false)}
-						class="absolute top-4 right-4 rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600"
+						class="absolute right-4 top-4 rounded-full bg-gray-700 p-2 text-white hover:bg-gray-600"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -682,9 +578,41 @@
 			</div>
 		{/if}
 	</div>
+
+	<!-- Modal de Fim de Jogo (10 partidas) -->
+	{#if showGameEndModal}
+		<div
+			class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+			role="dialog"
+			aria-modal="true"
+			transition:fade
+		>
+			<div
+				class="relative max-w-md rounded-2xl border-2 border-yellow-400 bg-gray-800 p-8 text-white shadow-2xl"
+			>
+				<div class="text-center">
+					<div class="mb-4 text-3xl">🎉</div>
+					<h2 class="mb-4 text-2xl font-bold text-yellow-400">Fim de Jogo!</h2>
+					<p class="mb-6 text-lg leading-relaxed">{gameEndMessage}</p>
+					<button
+						on:click={() => (showGameEndModal = false)}
+						class="rounded-lg bg-yellow-600 px-6 py-3 font-semibold text-black transition hover:bg-yellow-500"
+					>
+						Fechar
+					</button>
+				</div>
+			</div>
+		</div>
+	{/if}
 </div>
 
 <style>
+	.slow-gif {
+		animation-duration: 10s;
+		animation-timing-function: steps(8, end);
+		animation-iteration-count: infinite;
+	}
+
 	/* Container principal com tamanho fixo em relação à viewport */
 	.fixed-container {
 		position: fixed;
@@ -768,39 +696,6 @@
 
 	.animate-pulse {
 		animation: pulse 0.5s ease-in-out;
-	}
-
-	@keyframes bounce {
-		0%,
-		100% {
-			transform: translateY(0);
-		}
-		50% {
-			transform: translateY(-8px);
-		}
-	}
-
-	.animate-bounce {
-		animation: bounce 0.6s;
-	}
-
-	@keyframes hit {
-		0%,
-		100% {
-			transform: translateY(0);
-		}
-		20% {
-			transform: translateY(-10px);
-		}
-		40% {
-			transform: translateY(0);
-		}
-		60% {
-			transform: translateX(-5px);
-		}
-		80% {
-			transform: translateX(5px);
-		}
 	}
 
 	.animate-hit {
