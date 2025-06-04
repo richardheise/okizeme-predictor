@@ -293,21 +293,18 @@
 	}
 </script>
 
-<!-- Container principal com tamanho fixo -->
-<div class="fixed-container">
-	<div class="bg flex min-h-screen items-center justify-center p-4">
-		<!-- Placar de partidas no topo -->
+<!-- Container principal sem tamanho fixo -->
+<div class="h-screen">
+	<div class="bg flex h-full justify-center">
 		<div
-			class="absolute -top-0 left-1/2 w-[410px] -translate-x-1/2 transform rounded-lg bg-gray-800 px-6 py-3 text-2xl font-bold text-yellow-100 shadow-lg"
+			class="relative h-full w-[90%] overflow-y-auto rounded-b-2xl bg-black/90 p-6 text-white shadow-2xl"
 		>
-			Partidas: Você {matchWins.player} × {matchWins.ai} Oponente
-		</div>
-		<!-- Cardbox central com tamanho fixo -->
-		<div
-			class="game-card relative h-[100vh] w-[90vw] rounded-2xl bg-black/90 p-8 text-white shadow-2xl {screenShake
-				? 'animate-screen-shake'
-				: ''}"
-		>
+			<!-- Placar de partidas movido para dentro -->
+			<div
+				class="mx-auto mb-6 w-full max-w-[500px] rounded-lg bg-gray-800 px-6 py-3 text-center text-2xl font-bold text-yellow-100 shadow-lg"
+			>
+				Partidas: Você {matchWins.player} × {matchWins.ai} I.A.
+			</div>
 			<!-- Botão Tabela e Música -->
 			<div class="absolute right-4 top-4 flex gap-2">
 				<button
@@ -371,9 +368,17 @@
 			</div>
 
 			<!-- Cabeçalho -->
-			<h1 class="font-orbitron mb-8 text-center text-5xl font-bold tracking-wide text-yellow-400">
-				OKIZEME SHOWDOWN
-			</h1>
+			<div class="mb-6 flex flex-col items-center">
+				<!-- Título do jogo -->
+				<h1 class="font-orbitron text-4xl font-bold tracking-wide text-yellow-400">
+					OKIZEME SHOWDOWN
+				</h1>
+
+				<!-- Placar de rounds -->
+				<div class="mt-2 text-3xl font-semibold">
+					Rounds: {roundWins.player} × {roundWins.ai}
+				</div>
+			</div>
 
 			<!-- Área de combate -->
 			<div class="mb-8 flex items-end justify-between">
@@ -428,10 +433,7 @@
 				</div>
 
 				<!-- VS -->
-				<div class="mx-4 flex flex-col items-center p-4">
-					<div class="mt-2 w-[210px] pb-2 text-3xl font-semibold">
-						Rounds: {roundWins.player} × {roundWins.ai}
-					</div>
+				<div class="flex flex-col items-center">
 					<div class="text-4xl font-bold text-red-500">VS</div>
 				</div>
 
@@ -474,7 +476,7 @@
 						{/if}
 					</div>
 
-					<div class="mb-2 text-2xl font-bold text-red-400">OPONENTE</div>
+					<div class="mb-2 text-2xl font-bold text-red-400">I.A.</div>
 					<div class="relative h-8 w-full rounded-full bg-gray-700 shadow-inner">
 						<div
 							class="h-full rounded-full bg-gradient-to-r from-red-500 to-red-600 transition-all duration-500 ease-out"
@@ -496,7 +498,9 @@
 			</h2>
 
 			<!-- Ações -->
-			<div class="mb-8 grid h-[360px] grid-cols-2 gap-4">
+			<div
+				class="mb-6 grid min-h-[280px] grid-cols-2 gap-3 md:min-h-[320px] md:gap-4 lg:min-h-[360px]"
+			>
 				{#if isDefending}
 					{#each defensiveOptionsButtonText as [title, description], index}
 						<button
@@ -521,21 +525,19 @@
 			</div>
 
 			<!-- Resultado da jogada -->
-			<div class="rounded-lg bg-gray-800/50 p-4 text-center" transition:fade>
+			<div class="mb-4 rounded-lg bg-gray-800/50 p-4 text-center" transition:fade>
 				{#if lastChoices.player}
 					<div class="grid grid-cols-3 gap-4 text-lg">
 						<div class="text-right text-blue-400">
 							<div class="font-bold">Você</div>
 							<div class="text-3xl font-semibold">{lastChoices.player}</div>
-							<!-- Texto maior e semibold -->
 						</div>
 						<div class="flex items-center justify-center text-2xl">
 							<div class="rounded-full bg-gray-700 p-2">⚔️</div>
 						</div>
 						<div class="text-left text-red-400">
-							<div class="font-bold">Oponente</div>
+							<div class="font-bold">I.A.</div>
 							<div class="text-3xl font-semibold">{lastChoices.opponent}</div>
-							<!-- Texto maior e semibold -->
 						</div>
 					</div>
 					<div class="mt-2 text-xl font-semibold text-yellow-300">{lastChoices.outcome}</div>
@@ -556,7 +558,7 @@
 				transition:fade
 			>
 				<div
-					class="relative w-[60%] overflow-auto rounded-2xl bg-gray-800 p-6 text-white shadow-2xl"
+					class="relative overflow-auto rounded-2xl bg-gray-800 p-6 text-white shadow-2xl"
 					on:click|stopPropagation
 				>
 					<button
@@ -611,24 +613,6 @@
 		animation-duration: 10s;
 		animation-timing-function: steps(8, end);
 		animation-iteration-count: infinite;
-	}
-
-	/* Container principal com tamanho fixo em relação à viewport */
-	.fixed-container {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		overflow: auto;
-	}
-
-	/* Cardbox central com tamanho fixo */
-	.game-card {
-		min-height: 90vh;
-		min-width: 90vw;
-		max-height: 90vh;
-		overflow-y: auto;
 	}
 
 	.bg {
