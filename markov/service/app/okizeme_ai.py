@@ -149,22 +149,25 @@ class OkizemeAI:
         else:
             raise ValueError("Defender must be set before getting player actions")
 
-    def update(self, action_taken:int):
+    def update(self, action_taken: int):
         if self.curr_defender == self.AI_DEFENDING:
             action_taken_str = self.offensive_actions[action_taken]
-
             self.offense_predictor.update(action_taken_str)
 
             if self.save_results:
                 self.offense_predictor_results[-1]["player_action"] = action_taken_str
 
+            self.last_action_type = "offense"
+
         elif self.curr_defender == self.PLAYER_DEFENDING:
             action_taken_str = self.defensive_actions[action_taken]
-
             self.defense_predictor.update(action_taken_str)
 
             if self.save_results:
                 self.defense_predictor_results[-1]["player_action"] = action_taken_str
+
+            self.last_action_type = "defense"
+
 
     def save_weights(self, path:str):
         offense_path = os.path.join(path, "offense")
@@ -198,23 +201,22 @@ class OkizemeAI:
             os.makedirs(self.path, exist_ok=True)
 
     def export_results(self, round_result: dict = None) -> None:
-        if len(self.defense_predictor_results) > 0:
+        if self.last_action_type == "defense" and self.defense_predictor_results:
             defense_file = os.path.join(self.path, "defense_results.csv")
             self._export_to_csv(defense_file, self.defense_predictor_results)
+            self.defense_predictor_results.clear()
 
-        if len(self.offense_predictor_results) > 0:
+        elif self.last_action_type == "offense" and self.offense_predictor_results:
             offense_file = os.path.join(self.path, "offense_results.csv")
             self._export_to_csv(offense_file, self.offense_predictor_results)
+            self.offense_predictor_results.clear()
 
-        # Se resultado de round foi fornecido, salva também
         if round_result:
             round_file = os.path.join(self.path, "round_results.csv")
             file_exists = os.path.isfile(round_file)
             with open(round_file, "a", newline="") as f:
                 fieldnames = [
-                    "match",
-                    "round",
-                    "winner",
+                    "match", "round", "winner",
                     "player_round_wins", "ai_round_wins",
                     "player_match_wins", "ai_match_wins"
                 ]
